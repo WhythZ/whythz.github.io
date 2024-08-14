@@ -135,7 +135,7 @@ jekyll new project_name
 ```
 
 - 我们`cd`进入到该项目目录下执行`jekyll server`或者`jekyll s`命令即可启动本地服务
-- 除了自己创建外，我们还可以使用别人的主题模板来搭建，可以在[Jekyll主题官网](http://jekyllthemes.org/)处寻找合适的模板，社区也有海量由开发者制作的主题可以选择
+- 除了自己创建外，我们还可以使用别人的主题模板来搭建，可以在Jekyll主题官网jekyllthemes.org处寻找合适的模板，社区也有海量由开发者制作的主题可以选择
 - 如果使用模板的话，一定要依据模板作者的要求，配置好环境，一步一步来即可
 - 直到如下图一般成功搭建，我们即可通过其提供的地址在本地实时编辑预览博客了
 ![jekyll-server运行成功.png](/resources/2024-08-15-如何用Jekyll与Github搭建博客/jekyll-server运行成功.png)
