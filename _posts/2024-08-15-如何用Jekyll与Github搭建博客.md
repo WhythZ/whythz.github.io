@@ -67,7 +67,7 @@ source ~/.bashrc
 ```
 
 # 二、安装RubyGems
-- `RubyGems`是`Ruby`的包管理器，下载链接在[此处]([https://rubygems.org/pages/download](https://rubygems.org/pages/download))，Linux端无需此步骤
+- `RubyGems`是`Ruby`的包管理器，下载链接在[此处](https://rubygems.org/pages/download)，Linux端无需此步骤
 - 下载zip文件到本地，然后解压到某目录下，在命令行中输入以下指令
 
 ```

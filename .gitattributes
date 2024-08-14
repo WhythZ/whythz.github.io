@@ -12,7 +12,7 @@
 *.js text eol=lf
 
 # Force batch scripts to always use CRLF line endings
-*.md text eol=crlf
+# *.md text eol=crlf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 
