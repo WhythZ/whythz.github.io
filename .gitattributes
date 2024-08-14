@@ -1,10 +1,8 @@
 # Set default behavior to automatically normalize line endings.
 * text=auto
 
-# Because Obsidian uses LF though on Windows 
-*.md text eol=lf
-
 # Force bash scripts to always use LF line endings
+.gitattributes eol=lf
 *.sh text eol=lf
 *.yml text eol=lf
 *.json text eol=lf
@@ -14,6 +12,7 @@
 *.js text eol=lf
 
 # Force batch scripts to always use CRLF line endings
+*.md text eol=crlf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 
