@@ -12,27 +12,28 @@ tags: [Git]
 # math: true
 # mermaid: true
 # image:
-#   path: /resources/xxxxxx.png
+#   path: /resources/2024-08-15-如何用Jekyll与Github搭建博客/ruby-msys2.png
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: Responsive rendering of Chirpy theme on multiple devices.
+#   alt: Responsive rendering of Chirpy theme on multiple devices
 ---
 
-
-# 一、安装Ruby环境
+## 一、安装Ruby环境
 >`Jekyll`的官方文档在[此处](https://jekyllcn.com)，其关于不同操作系统的配置指引在[此处](https://jekyllrb.com/docs/installation/)，此篇笔记如无特殊说明，均以Windows端的操作为例
 
-## 1.1 Windows端
+### 1.1 Windows端
 - Jekyll是由Ruby编写的，所以要安装配置Ruby环境
 - 如果是Windows端的话，从[此处](https://rubyinstaller.org/downloads/)下载安装`WITH DEVKIT`版本进行安装
 - 安装完成后还有一个安装步骤如下（若不小心退出了就使用`ridk install`即可重新进入），选择选项3，等待安装完成后不需要进行下一次数字的输入，直接退出即可
+
 ![ruby-msys2.png](/resources/2024-08-15-如何用Jekyll与Github搭建博客/ruby-msys2.png)
+
 - 打开`cmd`命令行输入下面的指令检测`Ruby`是否安装成功
 
 ```
 ruby -v
 ```
 
-## 1.2 Linux端
+### 1.2 Linux端
 - 如果是Linux端的话，先执行以下命令以使用最新的稳定版本更新系统
 
 ```
@@ -66,7 +67,7 @@ export PATH=$HOME/gems/bin:$PATH
 source ~/.bashrc
 ```
 
-# 二、安装RubyGems
+## 二、安装RubyGems
 - `RubyGems`是`Ruby`的包管理器，下载链接在[此处](https://rubygems.org/pages/download)，Linux端无需此步骤
 - 下载zip文件到本地，然后解压到某目录下，在命令行中输入以下指令
 
@@ -81,14 +82,14 @@ ruby setup.rb
 gem -v
 ```
 
-# 三、换源以提速
+## 三、换源以提速
 - 这是针对Windows端的方法
 
 ```
 gem sources -r https://rubygems.org/ -a https://gems.ruby-china.com/
 ```
 
-# 四、安装Jekyll
+## 四、安装Jekyll
 - 在命令行执行此指令以安装
 
 ```
@@ -101,7 +102,7 @@ gem install jekyll
 jekyll -v
 ```
 
-# 五、Bundler的使用
+## 五、Bundler的使用
 - 也可以使用`gem install bundle`安装`Bundler`，这样可以更加方便地管理各模板环境的依赖项
 - 在Windows端为`Bundler`换源提速
 
@@ -127,7 +128,7 @@ bundle update
 bundle exec your_command
 ```
 
-# 六、搭建基于Jekyll的博客
+## 六、搭建基于Jekyll的博客
 - 在某路径下使用指令创建一个项目，执行完成之后我们就成功创建了一个名为`project_name`的`Jekyll`项目文件夹
 
 ```
@@ -138,10 +139,12 @@ jekyll new project_name
 - 除了自己创建外，我们还可以使用别人的主题模板来搭建，可以在Jekyll主题官网jekyllthemes.org处寻找合适的模板，社区也有海量由开发者制作的主题可以选择
 - 如果使用模板的话，一定要依据模板作者的要求，配置好环境，一步一步来即可
 - 直到如下图一般成功搭建，我们即可通过其提供的地址在本地实时编辑预览博客了
+
 ![jekyll-server运行成功.png](/resources/2024-08-15-如何用Jekyll与Github搭建博客/jekyll-server运行成功.png)
+
 - 在本地调试完毕后，我们即可将模板整合到我们的仓库内并push到Github，然后在对应的仓库设置内创建页面即可，注意大部分主题模板都是以Github Actions的方式创建网页的，而不是像往常一样使用Branch
 
-# 七、遇到的问题
+## 七、遇到的问题
 - 执行`jekyll server`命令时如若遇到以下报错，解决方法是执行`gem install minima`，类似的问题解决方法差不多，把缺失的包下载下来即可
 
 ```

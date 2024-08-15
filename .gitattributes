@@ -2,7 +2,9 @@
 * text=auto
 
 # Force bash scripts to always use LF line endings
+*.md text eol=lf
 .gitattributes eol=lf
+.gitignore eol=lf
 *.sh text eol=lf
 *.yml text eol=lf
 *.json text eol=lf
@@ -12,7 +14,6 @@
 *.js text eol=lf
 
 # Force batch scripts to always use CRLF line endings
-# *.md text eol=crlf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 

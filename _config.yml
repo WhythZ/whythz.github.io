@@ -28,8 +28,8 @@ url: "https://whythz.github.io"
 github:
   username: WhythZ # change to your github username
 
-# twitter:
-#   username: # change to your twitter username
+twitter:
+  username: WhythZZZ # change to your twitter username
 
 social:
   # Change to your full name.
@@ -39,7 +39,7 @@ social:
   links:
     # 第一个链接将会作为版权所有者的链接
     - https://github.com/WhythZ # change to your github homepage
-    # - https://twitter.com/username # change to your twitter homepage
+    - https://twitter.com/WhythZZZ # change to your twitter homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
