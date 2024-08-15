@@ -2,8 +2,8 @@
 # author:
 title: 如何用Jekyll与Github搭建博客
 description: >-
-  这是我的第一条博客，写于此站点成功发布之后，用于记录下搭建的过程~
-date: 2024-08-15 01:41:00 +0800
+  这条博客写于此站点成功发布之后，由于我对前后端知识的了解比较浅薄，所以本文仅用于记录下自己作为非开发者搭建Jekyll基础环境的过程以及遇到的一些小问题
+date: 2024-08-14 02:41:00 +0800
 categories: [笔记, Git]
 tags: [Git]
 # pin: true
@@ -25,7 +25,7 @@ tags: [Git]
 - 如果是Windows端的话，从[此处](https://rubyinstaller.org/downloads/)下载安装`WITH DEVKIT`版本进行安装
 - 安装完成后还有一个安装步骤如下（若不小心退出了就使用`ridk install`即可重新进入），选择选项3，等待安装完成后不需要进行下一次数字的输入，直接退出即可
 
-![ruby-msys2.png](/resources/2024-08-15-如何用Jekyll与Github搭建博客/ruby-msys2.png)
+![ruby-msys2.png](/resources/2024-08-14-如何用Jekyll与Github搭建博客/ruby-msys2.png)
 
 - 打开`cmd`命令行输入下面的指令检测`Ruby`是否安装成功
 
@@ -140,7 +140,7 @@ jekyll new project_name
 - 如果使用模板的话，一定要依据模板作者的要求，配置好环境，一步一步来即可
 - 直到如下图一般成功搭建，我们即可通过其提供的地址在本地实时编辑预览博客了
 
-![jekyll-server运行成功.png](/resources/2024-08-15-如何用Jekyll与Github搭建博客/jekyll-server运行成功.png)
+![jekyll-server运行成功.png](/resources/2024-08-14-如何用Jekyll与Github搭建博客/jekyll-server运行成功.png)
 
 - 在本地调试完毕后，我们即可将模板整合到我们的仓库内并push到Github，然后在对应的仓库设置内创建页面即可，注意大部分主题模板都是以Github Actions的方式创建网页的，而不是像往常一样使用Branch
 
