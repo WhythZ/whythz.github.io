@@ -19,11 +19,14 @@ order: 4
 我会在博客贴一些学习笔记、有趣的经历或是有感而发的随笔等
 
 ## 交流与外部链接
-我的邮箱：jichenzong at outlook dot com
 
-我的Github主页：<https://github.com/WhythZ>
+**Email**：jichenzong at outlook dot com
 
-我的Bilibili主页：<https://space.bilibili.com/25804487>
+**WeChat**：WhythZJC
+
+**Github**：<https://github.com/WhythZ>
+
+**Bilibili**：<https://space.bilibili.com/25804487>
 
 ## 关于许可协议
 本博客内所有文章依照[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)协议进行授权
