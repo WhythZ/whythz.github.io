@@ -16,7 +16,7 @@ timezone: Asia/Shanghai
 
 title: WhythZ # the main title
 
-tagline: Jichen Zong # it will display as the sub-title
+tagline: Personal Blog # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   WhythZ's Blog
@@ -34,7 +34,7 @@ twitter:
 social:
   # Change to your full name.
   # 这将会显示为帖子的默认作者以及页脚的版权所有者
-  name: Jichen Zong
+  name: WhythZ
   email: jichenzong@outlook.com # change to your email address
   links:
     # 第一个链接将会作为版权所有者的链接

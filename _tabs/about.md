@@ -22,8 +22,6 @@ order: 4
 
 **Email**：jichenzong at outlook dot com
 
-**WeChat**：WhythZJC
-
 **Github**：<https://github.com/WhythZ>
 
 **Bilibili**：<https://space.bilibili.com/25804487>
