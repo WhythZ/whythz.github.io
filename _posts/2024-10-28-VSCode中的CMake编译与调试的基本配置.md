@@ -3,7 +3,7 @@
 title: VSCode中的CMake编译与调试的基本配置
 description: >-
   先介绍如何在VSCode中编写CMakeLists.txt以实现C++代码的多文件编译，然后介绍如何编写launch.json和tasks.json文件以实现代码的调试
-date: 2024-10-21 15:05:00 +0800
+date: 2024-10-28 19:33:00 +0800
 categories: [技术经验, 高级语言]
 tags: [C++, CMake, VSCode, Windows]
 # pin: true
