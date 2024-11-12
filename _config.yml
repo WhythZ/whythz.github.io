@@ -16,7 +16,7 @@ timezone: Asia/Shanghai
 
 title: WhythZ # the main title
 
-tagline: Personal Blog # it will display as the sub-title
+tagline: Blog Something # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   WhythZ's Blog
@@ -28,8 +28,8 @@ url: "https://whythz.github.io"
 github:
   username: WhythZ # change to your github username
 
-twitter:
-  username: WhythZZZ # change to your twitter username
+# twitter:
+#   username: # change to your twitter username
 
 social:
   # Change to your full name.
