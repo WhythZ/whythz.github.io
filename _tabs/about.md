@@ -7,7 +7,7 @@ order: 4
 <!-- > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
 {: .prompt-tip } -->
 
-## 你好！欢迎来到我的博客~
+## 欢迎来到我的博客~
 ![KonataIzumi.jpg](/assets/img/KonataIzumi.jpg)
 
 我是WhythZ，SCUT本科在读，喜欢音乐、单机游戏与动漫
@@ -16,7 +16,7 @@ order: 4
 
 ## 关于本博客
 
-我会在此博客站（依心情）贴点笔记或随笔杂文等，建站的初衷是想要分享与交流
+我会在此博客站点依心情贴一些笔记或随笔杂文等，建站的初衷是想要分享与交流
 
 >所以读者桑，如果你觉得内容有用（或有问题）的话欢迎多多留言呀~
 
