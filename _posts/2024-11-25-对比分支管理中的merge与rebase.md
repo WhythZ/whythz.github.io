@@ -19,7 +19,7 @@ image:
 
 >关于Git的基本操作讲解，参考我对应的博客：[Git入门基础知识汇总](https://whythz.github.io/posts/Git%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/)
 
-## 一、对比`rebase`与`merge`
+## 一、对比rebase与merge
 - `rebase`又称变基，其和`merge`都是用于合并分支的指令，但二者的合并方式有着较大的差异
 	- `git merge`
 		- 完整保留所有提交记录及其分支结构，并保持提交ID不变
