@@ -50,8 +50,6 @@ image:
 
 ![CompareMergeOrRebaseP5.png](/resources/2024-11-25-对比分支管理中的merge与rebase/CompareMergeOrRebaseP5.png)
 
-- 可以看到这两个分支上的提交并未产生冲突
-
 ## 三、进行`merge`会怎样
 - 此时切换到`master`分支上使用`git merge bran`进行合并（将`bran`合并到`master`上），结果如下图所示，可以看到所有的提交记录都被保留了下来，并且所有commit的ID编号都不会被改变
 
