@@ -33,6 +33,6 @@ order: 4
 **Bilibili**：<https://space.bilibili.com/25804487>
 
 ## 关于许可协议
-本博客站点内所有文章依照[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)协议进行授权，转载请标明出处
+本博客站点内所有文章依照[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)协议进行授权，转载请标明出处
 
 本站点托管于Github，详情请移步本站点的[项目仓库](https://github.com/WhythZ/whythz.github.io)进行了解
