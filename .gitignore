@@ -25,5 +25,5 @@ package-lock.json
 !.vscode/tasks.json
 
 # Misc
-_sass/dist
+_sass/vendors
 assets/js/dist

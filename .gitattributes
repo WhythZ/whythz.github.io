@@ -11,6 +11,7 @@
 *.xml text eol=lf
 *.html text eol=lf
 *.scss text eol=lf
+*.css text eol=lf
 *.js text eol=lf
 
 # Force batch scripts to always use CRLF line endings
