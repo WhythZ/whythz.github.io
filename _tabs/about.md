@@ -13,11 +13,9 @@ order: 4
 
 我是WhythZ，SCUT本科在读，我喜欢音乐、单机游戏、动漫，以及一切美的事物
 
-<!-- <div align=center>
-<p align="center"> -->
-<a href="https://www.exophase.com/user/WhythZ/"><img src="https://card.exophase.com/2/0/282708.png?1736350807"></a>
-<!-- </p>
-</div> -->
+<a href="https://www.exophase.com/user/WhythZ/">
+  <img src="https://card.exophase.com/2/0/282708.png?1736350807" alt="WhythZ Exophase Card">
+</a>
 
 我会在此博客站点依心情贴一些笔记或随笔杂文等，建站的初衷一是想以分享的方式回馈开源社区，二是期望与读者进行有价值的交流
 
