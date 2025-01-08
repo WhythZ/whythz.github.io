@@ -7,13 +7,19 @@ order: 4
 <!-- > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
 {: .prompt-tip } -->
 
-## 欢迎来到此博客~
-
 ![KonataIzumi.jpg](/assets/img/KonataIzumi.jpg)
 
-我是WhythZ，SCUT本科在读，我喜欢音乐、单机游戏与动漫，我爱欣赏美，并梦想着能创造美、成为美
+## 欢迎来到我的博客~
 
-我会在此博客站点依心情贴一些笔记或随笔杂文等，至于我建站的初衷，一是想以分享的方式回馈开源社区，二是期望与读者进行有价值的交流
+我是WhythZ，SCUT本科在读，我喜欢音乐、单机游戏、动漫，以及一切美的事物
+
+<!-- <div align=center>
+<p align="center"> -->
+<a href="https://www.exophase.com/user/WhythZ/"><img src="https://card.exophase.com/2/0/282708.png?1736350807"></a>
+<!-- </p>
+</div> -->
+
+我会在此博客站点依心情贴一些笔记或随笔杂文等，建站的初衷一是想以分享的方式回馈开源社区，二是期望与读者进行有价值的交流
 
 >所以读者桑，如果我的文章帮助到了你，或是其内容存在纰漏的话，都欢迎在对应文章下的评论区给我留言~同时也欢迎给[我的仓库](https://github.com/WhythZ/whythz.github.io)点一个可爱的Star来让更多人看到这个站点~
 
