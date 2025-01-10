@@ -9,6 +9,7 @@ order: 4
 <!-- <div class="title-block">Friends</div> -->
 <ul class="readers-list clearfix">
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://blog.inkey.top"><div>InkeyP</div><div>网安大手子</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Haoquan的个人主页" target="_blank" href="https://haoquanzhang.github.io/"><div>Haoquan</div><div>CV领域高手</div></a></li>
 </ul>
 
 <!-- <div class="title-block">Classification Title</div>
