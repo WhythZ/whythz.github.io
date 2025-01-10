@@ -4,6 +4,8 @@ icon: fas fa-info-circle
 order: 5
 ---
 
+<!-- 图标资源及其配置名称来源于https://fontawesome.com/icons -->
+
 <!-- > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
 {: .prompt-tip } -->
 
