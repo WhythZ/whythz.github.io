@@ -6,10 +6,15 @@ order: 4
 
 <div class="page-friends page-common">
 
-<!-- <div class="title-block">Friends</div> -->
+<div class="title-block">朋友</div>
 <ul class="readers-list clearfix">
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://blog.inkey.top"><div>InkeyP</div><div>网安大手子</div></a></li>
+</ul>
+
+<div class="title-block">前辈</div>
+<ul class="readers-list clearfix">
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Haoquan的个人主页" target="_blank" href="https://haoquanzhang.github.io/"><div>Haoquan</div><div>CV领域高手</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Xinjie的个人主页" target="_blank" href="https://xinjie-shen.com/"><div>Xinjie</div><div>AI领域高手</div></a></li>
 </ul>
 
 <!-- <div class="title-block">Classification Title</div>
