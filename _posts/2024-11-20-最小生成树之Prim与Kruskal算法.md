@@ -4,7 +4,7 @@ title: 最小生成树之Prim与Kruskal算法
 description: >-
   从生成树的定义引入，介绍MST的重要性，然后详细分析寻找MST的两种经典算法的实现与复杂度
 date: 2024-11-20 01:35:00 +0800
-categories: [学科笔记, 数据结构]
+categories: [编程相关, 数据结构]
 tags: [数据结构, C++]
 # pin: true
 # media_subpath: '/resources/'
