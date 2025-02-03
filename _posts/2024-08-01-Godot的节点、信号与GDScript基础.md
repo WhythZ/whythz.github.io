@@ -1,6 +1,6 @@
 ---
 # author:
-title: Godot的节点、信号与GDScript基础
+title: Godot的节点、信号概念与GDScript基础
 description: >-
   虽说Godot支持C#和C++等其它语言，但目前阶段GDScript更能发挥出Godot的特性与优势，其开发社区的资料文档也更为全面完整，此博客记录了Godot中节点与信号的重要概念，以及GDScript的基本编写语法
 date: 2024-08-01 15:19:00 +0800
@@ -26,7 +26,7 @@ tags: [Godot]
 - 节点之间可以有父子关系，一个节点可以有多个子节点
 - 大部分节点都具有非常具体的功能，往往直接涉及人类的视听感官，如显示图片、播放音乐、显示模型、模拟物理体等；比如一个有贴图、可以检测敌人以便造成伤害的子弹，我们可以为之创建一个`Area2D`节点（可以进行区域的检测），然后为之添加子节点`CollisionShape2D`用于确定区域的形状（类似于Unity中添加xxxCollider2D的Component一样），然后可以添加用于显示子弹贴图的子节点`Sprite2D`，然后再添加相应代码即可
 
-![GodotNodeIntroduce.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotNodeIntroduce.png)
+![GodotNodeIntroduce.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotNodeIntroduce.png)
 
 #### 1.1.2 节点在场景树与服务器的控制下运行
 - 场景树是游戏的主循环对象，只有在树下的节点才可以正常发挥其功能（节点初始化时并不在树下，需要手动处理）
@@ -101,7 +101,7 @@ func _ready()
 #### 1.2.3 使用`%`访问独特的唯一名称节点
 - 我们可以将比如GameManager这种我们确定整个游戏只会存在一个的东西设置为一个特殊的唯一节点，这样这个节点右侧就会出现一个%符号，再按一下可以取消该设置
 
-![GodotSetAsUniqueName.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotSetAsUniqueName.png)
+![GodotSetAsUniqueName.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotSetAsUniqueName.png)
 
 - 此时我们就可以通过`%`在任何相同场景中的脚本中访问这个GameManager了
 
@@ -140,11 +140,11 @@ Main
 #### 2.1.1 按钮按下的信号
 - 我们以`Button`节点为例，选中这个节点后我们可以看到该类节点上所有信号的列表
 
-![GodotButtonSignal.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotButtonSignal.png)
+![GodotButtonSignal.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotButtonSignal.png)
 
 - `Button`节点是`Main`节点的子节点，我们以`Button`节点上的`pressed()`信号为例，将其链接到此处的`Main`节点的脚本上：双击这个`pressed()`信号，弹出下面的界面
 
-![GodotButtonPressedSignal.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotButtonPressedSignal.png)
+![GodotButtonPressedSignal.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotButtonPressedSignal.png)
 
 - 选择Main后点Connect按钮，这将会在`Main`节点的脚本上创建一个对应的函数
 
@@ -155,7 +155,7 @@ func _on_button_pressed():
 
 - 此函数旁会有一个绿色箭头，这意味着有一个信号链接到了此函数，点击箭头会跳出相关信息
 
-![GodotButtonSignalOnScript.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotButtonSignalOnScript.png)
+![GodotButtonSignalOnScript.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotButtonSignalOnScript.png)
 
 - 我们将函数中的`pass`替换为按下按钮后（即`pressed`信号被发出）要执行的语句即可
 
@@ -214,7 +214,7 @@ func _on_player_level_up():
 
 - 此时我们运行场景，得到以下输出
 
-![GodotLevelUpSignal.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotLevelUpSignal.png)
+![GodotLevelUpSignal.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotLevelUpSignal.png)
 
 #### 2.2.2 传参的信号
 - 同样还是玩家升级的信号，我们新增要求：玩家在特定等级解锁特定等级的技能，这需要我们将玩家等级记录下来并传递在信号中
@@ -274,7 +274,7 @@ func _on_player_level_up(level: int):
 
 - 运行后得到以下输出
 
-![GodotLevelUpSignalWithParameter.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotLevelUpSignalWithParameter.png)
+![GodotLevelUpSignalWithParameter.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotLevelUpSignalWithParameter.png)
 
 ## 三、关于脚本
 - GDScript是专门为了Godot进行游戏开发使用的面向对象的编程语言，其语法与Python较为相似
@@ -385,7 +385,7 @@ print(damage)
 # 100
 ```
 
-![GodotInspectorSetValue.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotInspectorSetValue.png)
+![GodotInspectorSetValue.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotInspectorSetValue.png)
 
 #### 4.3.3 向量
 - 常用二维向量`Vector2`和三维向量`Vector3`
@@ -429,7 +429,7 @@ print("It's MyGO!!!!!")
 ### 5.2 按键输入
 - 在`Project Settings`面板中的`Input Map`处设置按键映射，我们新建一个例如名为`my_action`的动作，并将空格键`Space`绑定到该动作下
 
-![GodotInputMap.png](/resources/2024-08-01-Godot的节点、信号与GDScript基础/GodotInputMap.png)
+![GodotInputMap.png](/resources/2024-08-01-Godot的节点、信号概念与GDScript基础/GodotInputMap.png)
 
 - 接下来我们在父节点`Main`的脚本下引出`_input(event)`函数用于处理按键输入，这个函数是Godot内置的函数
 
