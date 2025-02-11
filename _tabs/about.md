@@ -25,14 +25,6 @@ order: 5
 
 >所以读者桑，如果我的文章帮助到了你，或是其内容存在纰漏的话，都欢迎在对应文章下的评论区给我留言~同时也欢迎给[我的仓库](https://github.com/WhythZ/whythz.github.io)点一个可爱的Star来让更多人看到这个站点~
 
-## 温馨提示
-
-1. 如果你遇到了文字间Latex表达式渲染失败的情况，可以通过刷新网页来解决
-
-2. 本站部分文章使用了白色底的图片，建议通过本站菜单栏中的如下按钮调整页面为夜间黑色主题，这有助于看清图片轮廓
-
-![LightsOffButton.png](/assets/img/LightsOffButton.png)
-
 ## 外部链接
 
 >如果你对本站点有任何方面的建议，或是其他任何合理原因，都欢迎找我多多交流~
@@ -42,6 +34,14 @@ order: 5
 **Github**：<https://github.com/WhythZ>
 
 **Bilibili**：<https://space.bilibili.com/25804487>
+
+## 温馨提示
+
+1. 如果你在阅读过程中遇到了文字间Latex表达式渲染失败的情况，可以通过刷新网页来解决
+
+2. 本站部分文章使用了白色底的图片，建议通过本站菜单栏中的如下按钮调整页面为夜间黑色主题，这有助于看清图片轮廓
+
+![LightsOffButton.png](/assets/img/LightsOffButton.png)
 
 ## 许可协议
 
