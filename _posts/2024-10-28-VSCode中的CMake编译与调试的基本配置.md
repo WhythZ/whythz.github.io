@@ -185,7 +185,7 @@ include_directories(include)
 
 - 此时默认生成的配置内容如下
 
-```json
+```javascript
 /* tasks.json */
 {
     "tasks": [
@@ -250,7 +250,7 @@ include_directories(include)
 ### 3.2 配置tasks.json
 - 下面是一个参考模板，可见该文件需要依赖我们使用`CMakeLists.txt`生成的`build`内的内容来运作以链接各头文件与源文件，最终借助`launch.json`调用该文件内的一系列自动化命令生成项目的可执行文件
 
-```json
+```javascript
 {
     "version": "2.0.0",
     "options": {
@@ -291,7 +291,7 @@ include_directories(include)
 ### 3.3 配置launch.json
 - 注意`"miDebuggerPath"`项参数要给到电脑本地的`gdb.exe`路径，不然无法调试
 
-```json
+```javascript
 {
     "version": "0.2.0",
     "preLaunchTask": "Build The Project", //对应tasks.json文件中标签为"Build The Project"的任务，即先完成tasks.json中的对应工作内容，再完成launch.json的工作内容
