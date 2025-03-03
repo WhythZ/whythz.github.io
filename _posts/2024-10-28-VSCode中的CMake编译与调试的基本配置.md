@@ -20,14 +20,14 @@ math: true
 ## 一、环境准备
 
 ### 1.1 MinGW安装
-- 记得配置环境变量
+- 官方下载网址[在此](https://www.mingw-w64.org/downloads/)，记得配置环境变量
 
 ### 1.2 CMake安装
 - 官方下载网址[在此](https://cmake.org/download/)，若下载免安装的`.zip`版本则可直接解压到某处，然后配置环境变量即可
 
 ![配置MinGW和CMake环境变量.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/配置MinGW和CMake环境变量.png)
 
-- 使用下列指令检查是否成功
+- 使用如下指令检查是否成功
 
 ```
 cmake --version
@@ -198,7 +198,21 @@ add_executable(Main ${SrcSub} ${SrcCur})
 include_directories(include)
 ```
 
-- 然后在VSCode内按下`Ctrl + Shift + P`快捷键，如下图进行编译器的选择（别选VS的那些）
+- 我们此时就可以在和`CMakeLists.txt`同目录下，新建一个`build`文件夹，然后在此处打开cmd命令行，输入以下指令来生成构建系统
+	- 构建系统需要指定`CMakeLists.txt`所在路径，此时在`build`目录下，所以用`..`表示 其在上一级目录
+	- Windows 下CMake 默认使用微软MSVC作为编译器，若想用MinGW编译器则可通过`-G`参数来进行指定，只有第一次构建项目时需要指定
+
+```
+cmake -G"MinGW Makefiles" ..
+```
+
+- 此时在`build`目录下会生成Makefile文件，然后我们需要使用如下命令来调用编译器实际编译和链接项目，运行成功后会在`build`目录下生成`.exe`可执行文件，在命令行中通过如`Main.exe`运行即可得到输出结果
+
+```
+cmake --build .
+```
+
+- 若是在VSCode中，按下`Ctrl+Shift+P`快捷键，然后如下图进行编译器的选择（别选VS的那些）
 
 ![CMakeConfigure编译器选择.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/CMakeConfigure编译器选择.png)
 
