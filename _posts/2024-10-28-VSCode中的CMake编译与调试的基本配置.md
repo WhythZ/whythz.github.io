@@ -212,7 +212,7 @@ cmake -G"MinGW Makefiles" ..
 cmake --build .
 ```
 
-- 若是在VSCode中，按下`Ctrl+Shift+P`快捷键，然后如下图进行编译器的选择（别选VS的那些）
+- 若是在VSCode中，按下`Ctrl + Shift + P`快捷键，然后如下图进行编译器选择（别选VS的）
 
 ![CMakeConfigure编译器选择.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/CMakeConfigure编译器选择.png)
 
@@ -228,7 +228,10 @@ cmake --build .
 
 ![使用Make生成exe可执行文件.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/使用Make生成exe可执行文件.png)
 
-- 至此我们即可使用该`.exe`文件了，若我们需要对代码进行调试，则需要配置`tasks.json`和`launch.json`文件，若无需调试则可不管，每次直接`Ctrl + F5`生成可执行文件即可
+- 至此我们即可使用该`.exe`文件了，若我们需要对代码进行调试，则需要配置`tasks.json`和`launch.json`文件，若无需调试则可不管，每次直接`Ctrl + F5`运行可执行文件即可
+- 若`Ctrl + F5`无法对进行了新的修改的项目重新生成，那么需要手动再次运行一下`mingw32-make.exe`指令，或者通过下图的按钮来重新生成最新版本可执行文件，然后再`Ctrl + F5`来运行该文件
+
+![VSCodeCmake重新生成.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/VSCodeCmake重新生成.png)
 
 ## 三、代码调试
 
