@@ -5,7 +5,7 @@ description: >-
   这条博客写于此站点成功发布之后，由于我对前后端知识的了解比较浅薄，所以本文仅用于记录下自己作为非开发者搭建Jekyll基础环境的过程以及遇到的一些小问题
 date: 2024-08-14 02:41:00 +0800
 categories: [工程相关, 博客搭建]
-tags: [Github, Jekyll]
+tags: [Github, Jekyll, 环境配置]
 # pin: true
 # media_subpath: '/resources/'
 # render_with_liquid: false

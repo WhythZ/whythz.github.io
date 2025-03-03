@@ -5,7 +5,7 @@ description: >-
   先介绍如何在VSCode中编写CMakeLists.txt以实现C++代码的多文件编译，然后介绍如何编写launch.json和tasks.json文件以实现代码的调试
 date: 2024-10-28 19:33:00 +0800
 categories: [编程相关, 高级语言]
-tags: [C++, CMake, VSCode, Windows]
+tags: [C++, CMake, VSCode, 环境配置]
 # pin: true
 # media_subpath: '/resources/'
 # render_with_liquid: false
