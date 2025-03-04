@@ -37,7 +37,7 @@ git clone https://github.com/emscripten-core/emsdk.git
 
 ![Emscripten克隆emsdk.png](/resources/2025-03-03-在Windows安装并测试Emscripten全流程/Emscripten克隆emsdk.png)
 
-- 然后我们需要进入克隆下来的名为`emsdk`的目录中，在终端执行如下指令，非Windows系统则需将`emsdk.bat`替换为`./emsdk`，将``emsdk_env.bat``替换为`source ./emsdk_env.sh`
+- 然后我们需要进入克隆下来的名为`emsdk`的目录中，在终端执行如下指令，非Windows系统则需将`emsdk.bat`替换为`./emsdk`
 
 ```
 # 下载并安装最新的SDK工具
@@ -71,7 +71,7 @@ em++ -v
 
 ![Emscripten测试安装成功.png](/resources/2025-03-03-在Windows安装并测试Emscripten全流程/Emscripten测试安装成功.png)
 
-- 按照提示，我们关闭当前命令行后，下次重新打开时需要重新输入以下指令重新激活（仍然是临时激活），才能运行`emcc -v`得到正常输出
+- 按照提示，我们关闭当前命令行后，下次重新打开时需要重新输入以下指令重新激活（仍然是临时激活），才能运行`emcc -v`得到正常输出，非Windows系统需将`emsdk_env.bat`替换为`source ./emsdk_env.sh`
 
 ```
 # 为当前终端控制台重新激活emsdk环境变量
