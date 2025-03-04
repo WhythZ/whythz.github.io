@@ -5,7 +5,7 @@ description: >-
   大型项目不免要使用CMakeLists.txt来构建项目，本文以编译一个简单的代码库（无引入第三方库）为例，演示直到获取无漏洞构建结果的过程，并阐述了过程中遇到的问题（包括如何处理异常的抛出、如何将本地文件加载到虚拟文件系统等）以及是如何逐步解决的
 date: 2025-03-04 03:01:00 +0800
 categories: [编程相关, 高级语言]
-tags: [C++, Emscripten, 环境配置]
+tags: [C++, Emscripten, CMake, 环境配置]
 # pin: true
 # media_subpath: '/resources/'
 # render_with_liquid: false
@@ -70,6 +70,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sNO_DISABLE_EXCEPTION_CATCHING")
 ![emmake编译结果运行文件加载报错.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake编译结果运行文件加载报错.png)
 
 ## 三、文件加载方法
+
+### 3.1 加载单个文件
 - 如上图所示，报错源于如下代码，WebAssembly环境中的使用的是虚拟文件系统，若程序尝试打开本地文件则会报错
 
 ```cpp
@@ -123,3 +125,66 @@ SortingManager::SortingManager()
 - 但是仍有新的报错出现，经搜索得出这大概率是由于代码中出现了内存泄漏或是数组越界等问题，经过排查这是某处数组越界导致的（该漏洞于[此条提交](https://github.com/WhythZ/DataStructure/commit/74fc17e87867601da2392a4296386f0370d2887b)中被修复），我们修复该代码后重新编译，再`node Main.js`即可得到无报错的优美输出
 
 ![emmake完美编译成功.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake完美编译成功.png)
+
+- 可以发现成功构建所得的若干文件中，多了一个`Main.data`文件，其包含了预加载到虚拟文件系统中的数据，除了可以包含此处的`.csv`配置文件外，还可以是图片、音频等资源文件
+
+![emmake虚拟文件系统数据.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake虚拟文件系统数据.png)
+
+### 3.2 文件放在子目录
+- 当资源或配置文件多起来时，首先我不希望将它们零散地放在`build`目录下，那么可以在`build`内创建一个`Assets`目录，然后将被加载的文件放入，同时修改`CMakeLists.txt`内的加载路径
+
+```cmake
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sFORCE_FILESYSTEM --preload-file Assets/IntTestCase.csv")
+```
+
+- 最后修改代码中加载文件的路径，从`/`即虚拟文件系统根目录索引到`Assets`目录
+
+```cpp
+SortingManager::SortingManager()
+{
+	//加载测试案例文件中的整数列表
+	LoadTestCase("/Assets/IntTestCase.csv");
+}
+```
+
+- 然后重新执行必要的两条指令后即可同样构建运行成功
+
+![emmake虚拟文件系统子目录.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake虚拟文件系统子目录.png)
+
+### 3.3 加载多个文件
+- 如果有很多需要被加载的文件，我们最好不应该在`CMakeLists.txt`中为每个文件都进行如下的配置，这样十分繁琐且耦合
+
+```cmake
+`set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sFORCE_FILESYSTEM --preload-file Assets/xxx.yyy")`
+```
+
+- 只需通过如下语句加载整个目录即可，无论`Assets/`中有多少文件CMake都会自动加载它们
+
+```cmake
+# 使用--preload-file加载整个Assets目录
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sFORCE_FILESYSTEM --preload-file Assets")
+```
+
+## 四、生成HTML
+- 完成上述流程并成功编译后，遂尝试将代码编译为HTML，需在`CMakeLists.txt`中添加如下指令
+
+```cmake
+set(CMAKE_EXECUTABLE_SUFFIX ".html")
+```
+
+- 然后同样在`build`中的终端执行完以下两句后，便可得到生成的额外一个`Main.html`文件
+
+```
+emcmake cmake ..
+emmake make
+```
+
+![emmake编译生成HTML.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake编译生成HTML.png)
+
+- 然后同理先启用本地HTTP服务器，然后在浏览器中打开`http://localhost:8080/Main.html`网页（而不是直接打开文件）即可看到输出结果
+
+```
+emrun --no_browser --port 8080 Main.html
+```
+
+![emmake成功打开HTML文件.png](/resources/2025-03-04-使用Emscripten+CMake构建代码的踩坑/emmake成功打开HTML文件.png)
