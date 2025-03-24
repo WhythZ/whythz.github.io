@@ -9,7 +9,7 @@ tags: [Godot]
 # pin: true
 # media_subpath: '/resources/'
 # render_with_liquid: false
-# math: true
+math: true
 # mermaid: true
 # image:
 #   path: /resources/xxxxxx.png
