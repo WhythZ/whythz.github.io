@@ -18,7 +18,8 @@ math: true
 ---
 
 ## 一、安装Ruby环境
->`Jekyll`的官方文档在[此处](https://jekyllcn.com)，其关于不同操作系统的配置指引在[此处](https://jekyllrb.com/docs/installation/)，此篇笔记如无特殊说明，均以Windows端的操作为例
+
+>参考Jekyll的[官方文档](https://jekyllcn.com)，其关于不同操作系统的配置指引在[此处](https://jekyllrb.com/docs/installation/)，此篇笔记如无特殊说明，均以Windows端的操作为例
 
 ### 1.1 Windows端
 - Jekyll是由Ruby编写的，所以要安装配置Ruby环境
