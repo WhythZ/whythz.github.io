@@ -18,14 +18,14 @@ math: true
 ---
 
 ## 一、案例展示
-- 本文以我搭建的[华南理工未来技术学院课程攻略](https://gzic-openfuturetech.github.io/SCUT-FT-Guide/)为例，其源码位于[此仓库](https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/tree/main)（难保证该仓库的配置在未来不会变化，此处严谨声明一下，行文时用的是仓库的[该版本](https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/tree/db94db855532673a74bf7c1e6afd6270a73a7b4b)）
+- 本文以我搭建的[华南理工未来技术学院课程攻略](https://openfutech.github.io/SCUT-FT-Guide/)为例，其源码位于[此仓库](https://github.com/OpenFuTech/SCUT-FT-Guide/tree/main)（难保证该仓库的配置在未来不会变化，此处严谨声明一下，行文时用的是仓库的[该版本](https://github.com/OpenFuTech/SCUT-FT-Guide/tree/db94db855532673a74bf7c1e6afd6270a73a7b4b)）
 
 ![SCUT-FT-Guide示意.png](/resources/2025-03-25-使用MkDocs和Github快速搭建网页文档库/SCUT-FT-Guide示意.png)
 
 ## 3.2 部署流程
 
 ### 3.2.1 创建MkDocs配置文件
-- 在仓库根目录（与`.git`同目录）下创建一个`mkdocs.yml`文件进行基本的配置，更多的自定义配置参考[该页面说明](https://www.mkdocs.org/user-guide/configuration/)，例如上述课程攻略的[该配置文件](https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/blob/db94db855532673a74bf7c1e6afd6270a73a7b4b/mkdocs.yml)
+- 在仓库根目录（与`.git`同目录）下创建一个`mkdocs.yml`文件进行基本的配置，更多的自定义配置参考[该页面说明](https://www.mkdocs.org/user-guide/configuration/)，例如上述课程攻略的[该配置文件](https://github.com/OpenFuTech/SCUT-FT-Guide/blob/db94db855532673a74bf7c1e6afd6270a73a7b4b/mkdocs.yml)
 
 ```yml
 site_name: 必填项，设置网站页面的标题
@@ -71,7 +71,7 @@ mkdocs
 ```
 
 - 每个课程文件夹内存在一个`README.md`文件，用于作为生成的对应课程页面的`index.html`内容的一部分，课程文件夹内的其他子文件夹统一视作资源文件，由脚本遍历生成资源文件列表置于`index.html`末尾
-- 我们需要一个脚本来遍历所有课程组内的所有课程，为每个课程生成上述的`index.html`文件，示例项目根目录下的[update.py](https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/blob/db94db855532673a74bf7c1e6afd6270a73a7b4b/update.py)脚本如下，你可以根据不同的资料组织形式灵活修改脚本
+- 我们需要一个脚本来遍历所有课程组内的所有课程，为每个课程生成上述的`index.html`文件，示例项目根目录下的[update.py](https://github.com/OpenFuTech/SCUT-FT-Guide/blob/db94db855532673a74bf7c1e6afd6270a73a7b4b/update.py)脚本如下，你可以根据不同的资料组织形式灵活修改脚本
 
 ```python
 import os
@@ -85,9 +85,9 @@ README_MD = ['README.md']
 # 支持的文本文件扩展名，文本文件会生成文本链接
 TXT_EXTS = ['md', 'txt']
 # GitHub上文本文件的访问URL前缀
-TXT_URL_PREFIX = 'https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/blob/master/'
+TXT_URL_PREFIX = 'https://github.com/OpenFuTech/SCUT-FT-Guide/blob/master/'
 # GitHub上二进制文件的访问URL前缀
-BIN_URL_PREFIX = 'https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/raw/master/'
+BIN_URL_PREFIX = 'https://github.com/OpenFuTech/SCUT-FT-Guide/raw/master/'
 
 
 def GenerateFileList(courseGroup: str, course: str):
@@ -199,7 +199,7 @@ if __name__ == '__main__':
 ```
 
 ### 3.2.3 创建Actions工作流
-- 然后我们需要在根目录下创建`.github`文件夹，在该文件夹下创建`workflows`文件夹，其内创建一个`.yml`文件以配置Github Actions工作流，如下[main.yml](https://github.com/GZIC-OpenFutureTech/SCUT-FT-Guide/blob/main/.github/workflows/main.yml)所示
+- 然后我们需要在根目录下创建`.github`文件夹，在该文件夹下创建`workflows`文件夹，其内创建一个`.yml`文件以配置Github Actions工作流，如下[main.yml](https://github.com/OpenFuTech/SCUT-FT-Guide/blob/main/.github/workflows/main.yml)所示
 
 ```yml
 # This is a basic workflow to help you get started with Actions
