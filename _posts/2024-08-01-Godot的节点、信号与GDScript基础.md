@@ -4,7 +4,7 @@ title: Godot的节点、信号概念与GDScript基础
 description: >-
   虽说Godot支持C#和C++等其它语言，但目前阶段GDScript更能发挥出Godot的特性与优势，其开发社区的资料文档也更为全面完整，此博客记录了Godot中节点与信号的重要概念，以及GDScript的基本编写语法
 date: 2024-08-01 15:19:00 +0800
-categories: [游戏开发, 游戏引擎]
+categories: [游戏开发, 引擎相关]
 tags: [Godot]
 # pin: true
 # media_subpath: '/resources/'
