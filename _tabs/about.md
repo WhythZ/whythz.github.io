@@ -33,6 +33,8 @@ order: 5
 
 **Github**：<https://github.com/WhythZ>
 
+**Steam**：<https://steamcommunity.com/id/WhythZ/>
+
 **Bilibili**：<https://space.bilibili.com/25804487>
 
 ## 温馨提示
