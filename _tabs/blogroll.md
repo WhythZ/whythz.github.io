@@ -6,15 +6,16 @@ order: 4
 
 <div class="page-friends page-common">
 
-<!-- <div class="title-block">朋友</div> -->
+<!-- <div class="title-block">分组1</div> -->
 <ul class="readers-list clearfix">
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://blog.inkey.top"><div>InkeyP</div><div>网安大手子</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Haoquan的主页" target="_blank" href="https://haoquanzhang.github.io/"><div>Haoquan</div><div>CV大手子</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Xinjie的主页" target="_blank" href="https://xinjie-shen.com/"><div>Xinjie</div><div>AI大手子</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="LofiSu的博客" target="_blank" href="https://www.lofisu.chat/"><div>LofiSu</div><div>空生酥</div></a></li>
 <!-- </ul> -->
 
-<!-- <div class="title-block">前辈</div> -->
+<!-- <div class="title-block">分组2</div> -->
 <!-- <ul class="readers-list clearfix"> -->
-<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Haoquan的个人主页" target="_blank" href="https://haoquanzhang.github.io/"><div>Haoquan</div><div>CV领域高手</div></a></li>
-<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Xinjie的个人主页" target="_blank" href="https://xinjie-shen.com/"><div>Xinjie</div><div>AI领域高手</div></a></li>
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="ICBrochure平台主页" target="_blank" href="http://www.icbrochure.tech/"><div>ICBrochure</div><div>IC热爱者平台</div></a></li>
 </ul>
 
