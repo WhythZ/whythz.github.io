@@ -50,15 +50,15 @@ cmake --version
 
 ```
 - Root/
-	- Codes/
-		- 01-XXX/
-		- 02-XXX/
-		- 03-XXX/
-			- TestCase.csv
-			- Loader.cpp
-		- Main.cpp
-	- Libs/...
-	- Others/...
+    - Codes/
+        - 01-XXX/
+        - 02-XXX/
+        - 03-XXX/
+            - TestCase.csv
+            - Loader.cpp
+        - Main.cpp
+    - Libs/...
+    - Others/...
 ```
 
 - 我在`Loader.cpp`内实现加载`Test.csv`内数据的函数如下，`Loader`类的单例对象会在`Main.cpp`内被创建，函数`LoadTestCase`也会在`Main.cpp`内被调用
@@ -66,17 +66,17 @@ cmake --version
 ```cpp
 bool Loader::LoadTestCase(std::string _path)
 {
-	//加载路径下的文件
-	std::ifstream _file(_path);
-	//检查是否成功加载
-	if (!_file.good())
-		return false;
+    //加载路径下的文件
+    std::ifstream _file(_path);
+    //检查是否成功加载
+    if (!_file.good())
+        return false;
 
-	//...
+    //...
 
-	//关掉文件
-	_file.close();
-	return true;
+    //关掉文件
+    _file.close();
+    return true;
 }
 ```
 
@@ -128,10 +128,10 @@ gcc file_name.c -o yourname
 
 ```
 - include/
-	- Header.h
+    - Header.h
 - src/
-	- Source1.cpp
-	- Source2.cpp
+    - Source1.cpp
+    - Source2.cpp
 - Test.cpp
 ```
 
@@ -199,8 +199,8 @@ include_directories(include)
 ```
 
 - 我们此时就可以在和`CMakeLists.txt`同目录下，新建一个`build`文件夹，然后在此处打开cmd命令行，输入以下指令来生成构建系统
-	- 构建系统需要指定`CMakeLists.txt`所在路径，此时在`build`目录下，所以用`..`表示 其在上一级目录
-	- Windows 下CMake 默认使用微软MSVC作为编译器，若想用MinGW编译器则可通过`-G`参数来进行指定，只有第一次构建项目时需要指定
+    - 构建系统需要指定`CMakeLists.txt`所在路径，此时在`build`目录下，所以用`..`表示 其在上一级目录
+    - Windows 下CMake 默认使用微软MSVC作为编译器，若想用MinGW编译器则可通过`-G`参数来进行指定，只有第一次构建项目时需要指定
 
 ```
 cmake -G"MinGW Makefiles" ..
@@ -391,8 +391,8 @@ cmake --build .
 ![CMake调试选项.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/CMake调试选项.png)
 
 - 此时不能直接对源文件使用右上角按钮进行运行（CompileRun也不行），大概率会出问题
-	- 若`#include`未使用相对路径，就会导致报错，因为使用`CMakeLists.txt`时的头文件包含是可以不写路径而直接写头文件名字的
-	- 此时的`tasks.json`内执行的是CMake相关指令，所以直接运行源文件的话可能导致无法链接所有源文件的情况（即只会编译被运行的源文件内的内容，而其它没被包含进来的代码都不会被Linking进来，这就会导致一些空实现的问题）
+    - 若`#include`未使用相对路径，就会导致报错，因为使用`CMakeLists.txt`时的头文件包含是可以不写路径而直接写头文件名字的
+    - 此时的`tasks.json`内执行的是CMake相关指令，所以直接运行源文件的话可能导致无法链接所有源文件的情况（即只会编译被运行的源文件内的内容，而其它没被包含进来的代码都不会被Linking进来，这就会导致一些空实现的问题）
 
 ### 3.4 关于插件CompileRun的使用
 - 使用插件`C/C++ Compile Run`提供的如下的第一个按钮即可一键运行单文件代码（多文件可能会产生问题），使用第二个按钮即可进行调试而无需配置`tasks.json`和`launch.json`文件
@@ -401,5 +401,5 @@ cmake --build .
 ![CompileRun.png](/resources/2024-10-28-VSCode中的CMake编译与调试的基本配置/CompileRun.png)
 
 - 但是该插件只会编译被运行的单个源文件的内容，而其它没被包含进来的源代码都不会被Link进来（也可能是我不会设置），这就可能会导致一些空实现的问题，所以要注意以下几点
-	- `#include`的头文件应当同时包含声明与实现，若仅在`.h`内写了声明，在某个`.cpp`内写了实现，该插件在运行包含了该`.h`声明的源代码时就会导致无法链接到`.cpp`实现的错误
-	- `#include`的头文件应当使用相对路径而不仅仅是头文件名，否则会报错
+    - `#include`的头文件应当同时包含声明与实现，若仅在`.h`内写了声明，在某个`.cpp`内写了实现，该插件在运行包含了该`.h`声明的源代码时就会导致无法链接到`.cpp`实现的错误
+    - `#include`的头文件应当使用相对路径而不仅仅是头文件名，否则会报错

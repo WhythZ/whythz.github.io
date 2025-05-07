@@ -21,12 +21,12 @@ image:
 
 ## 一、对比rebase与merge
 - `rebase`又称变基，其和`merge`都是用于合并分支的指令，但二者的合并方式有着较大的差异
-	- `git merge`
-		- 完整保留所有提交记录及其分支结构，并保持提交ID不变
-		- 可追溯性较高，但复杂的结构会导致难以进行代码审核与漏洞追查
-	- `git rebase`
-		- 会在合并后以分支的共同根提交记录作为基底，将分支结构融合重组为一条线性结构，这会导致某些提交ID的改变
-		- 使得提交记录较为整洁，但当多人协作时若不遵循黄金法则，则会导致仓库严重混乱、空间浪费等问题
+    - `git merge`
+        - 完整保留所有提交记录及其分支结构，并保持提交ID不变
+        - 可追溯性较高，但复杂的结构会导致难以进行代码审核与漏洞追查
+    - `git rebase`
+        - 会在合并后以分支的共同根提交记录作为基底，将分支结构融合重组为一条线性结构，这会导致某些提交ID的改变
+        - 使得提交记录较为整洁，但当多人协作时若不遵循黄金法则，则会导致仓库严重混乱、空间浪费等问题
 
 ![CompareMergeOrRebase.png](/resources/2024-11-25-对比分支管理中的merge与rebase/CompareMergeOrRebase.png)
 
@@ -39,8 +39,8 @@ image:
 ![CompareMergeOrRebaseP1.png](/resources/2024-11-25-对比分支管理中的merge与rebase/CompareMergeOrRebaseP1.png)
 
 - 此时创建一个新分支`bran`，然后进行如下修改提交
-	- 在`master`分支上将`Function-1`的实现先后改为`Implementation-X`、`Implementation-XX`
-	- 在`bran`分支上将`Function-2`的实现先后改为`Implementation-Y`、`Implementation-YY`
+    - 在`master`分支上将`Function-1`的实现先后改为`Implementation-X`、`Implementation-XX`
+    - 在`bran`分支上将`Function-2`的实现先后改为`Implementation-Y`、`Implementation-YY`
 
 ![CompareMergeOrRebaseP2.png](/resources/2024-11-25-对比分支管理中的merge与rebase/CompareMergeOrRebaseP2.png)
 

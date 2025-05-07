@@ -77,27 +77,27 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sNO_DISABLE_EXCEPTION_CATCHING")
 ```cpp
 SortingManager::SortingManager()
 {
-	//加载测试案例文件中的整数列表
-	LoadTestCase("../Codes/03-Sorting/IntTestCase.csv");
+    //加载测试案例文件中的整数列表
+    LoadTestCase("../Codes/03-Sorting/IntTestCase.csv");
 }
 
 void SortingManager::LoadTestCase(std::string _path)
 {
-	//加载路径下的文件
-	std::ifstream _file(_path);
-	//检查是否成功加载
-	if (!_file.good())
-		throw std::runtime_error("ERROR: File \"IntTestCase.csv\" Not Found!");
+    //加载路径下的文件
+    std::ifstream _file(_path);
+    //检查是否成功加载
+    if (!_file.good())
+        throw std::runtime_error("ERROR: File \"IntTestCase.csv\" Not Found!");
 
-	//通过循环来遍历每行内容；getline函数第一参数位接收被读取的文件，第二参数位是存放读取的数据的对象，第三参数位以逗号为分隔符
-	std::string _gridBuf;
-	while (std::getline(_file, _gridBuf, ','))
-	{
-		srcList.emplace_back(stoi(_gridBuf));
-	}
+    //通过循环来遍历每行内容；getline函数第一参数位接收被读取的文件，第二参数位是存放读取的数据的对象，第三参数位以逗号为分隔符
+    std::string _gridBuf;
+    while (std::getline(_file, _gridBuf, ','))
+    {
+        srcList.emplace_back(stoi(_gridBuf));
+    }
 
-	//关掉文件
-	_file.close();
+    //关掉文件
+    _file.close();
 }
 ```
 
@@ -113,8 +113,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sFORCE_FILESYSTEM --preload-file IntTes
 ```cpp
 SortingManager::SortingManager()
 {
-	//加载测试案例文件中的整数列表
-	LoadTestCase("/IntTestCase.csv");
+    //加载测试案例文件中的整数列表
+    LoadTestCase("/IntTestCase.csv");
 }
 ```
 
@@ -142,8 +142,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sFORCE_FILESYSTEM --preload-file Assets
 ```cpp
 SortingManager::SortingManager()
 {
-	//加载测试案例文件中的整数列表
-	LoadTestCase("/Assets/IntTestCase.csv");
+    //加载测试案例文件中的整数列表
+    LoadTestCase("/Assets/IntTestCase.csv");
 }
 ```
 

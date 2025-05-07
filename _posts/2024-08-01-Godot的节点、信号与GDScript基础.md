@@ -50,10 +50,10 @@ math: true
 ```gdscript
 # 这个是父节点Main的脚本
 func _ready()
-	# 在节点被创建时，将标签文本内容初始化为字符串
-	$Label0.text = "Girls Band Cry"
-	# 标签文本的颜色为绿色
-	$Label0.modulate = Color.GREEN
+    # 在节点被创建时，将标签文本内容初始化为字符串
+    $Label0.text = "Girls Band Cry"
+    # 标签文本的颜色为绿色
+    $Label0.modulate = Color.GREEN
 ```
 
 - 对于子节点的子节点，拖入脚本中会产生一条路径（相对路径，从脚本当前路径开始，此处为Main节点上的脚本，而Player位于Main脚本之下）来定位这个对象，比如
@@ -92,9 +92,9 @@ print(weapon.get_path())
 @export var my_node: Sprite2D
 
 func _ready()
-	# Sprite2D是Node2D的子类，所以此条判断会被检测为true
-	if my_node is Node2D:
-		print("Is Node2D")
+    # Sprite2D是Node2D的子类，所以此条判断会被检测为true
+    if my_node is Node2D:
+        print("Is Node2D")
 # Is Node2D
 ```
 
@@ -120,12 +120,12 @@ func _ready()
 
 ```
 Main
-	Player
-		Collider
-		Sprite2D
-	Enemy
-		Collider
-		Sprite2D
+    Player
+        Collider
+        Sprite2D
+    Enemy
+        Collider
+        Sprite2D
 ```
 
 #### 1.3.2 兄弟节点间的通信
@@ -150,7 +150,7 @@ Main
 
 ```gdscript
 func _on_button_pressed():
-	pass
+    pass
 ```
 
 - 此函数旁会有一个绿色箭头，这意味着有一个信号链接到了此函数，点击箭头会跳出相关信息
@@ -179,14 +179,14 @@ var xp := 0
 
 # 计时器的timeout信号链接，实现每隔几秒增加5经验值
 func _on_timer_timeout():
-	xp += 5
-	print(xp)
-	# 经验值超过20时升级
-	if xp >= 20:
-		xp = 0
-		print("level up!")
-		# 释放升级的信号
-		level_up.emit()
+    xp += 5
+    print(xp)
+    # 经验值超过20时升级
+    if xp >= 20:
+        xp = 0
+        print("level up!")
+        # 释放升级的信号
+        level_up.emit()
 ```
 
 - 在`Main`脚本处，可以添加这个信号的链接，除了手动在引擎中添加外，还可以通过代码来链接或者断开链接，以下是另一个节点的脚本
@@ -202,14 +202,14 @@ extends Node
 var level_up_signal: Signal
 
 func _ready():
-	# 获取player中的升级信号
-	level_up_signal = player.level_up
-	# 真正与player中的升级信号建立链接，此时_on_player_level_up函数左侧才会出现绿色箭头
-	# 若想要断开链接，则同理调用disconnect函数即可
-	level_up_signal.connect(_on_player_level_up)
+    # 获取player中的升级信号
+    level_up_signal = player.level_up
+    # 真正与player中的升级信号建立链接，此时_on_player_level_up函数左侧才会出现绿色箭头
+    # 若想要断开链接，则同理调用disconnect函数即可
+    level_up_signal.connect(_on_player_level_up)
 
 func _on_player_level_up():
-	print("new skill unlocked!")
+    print("new skill unlocked!")
 ```
 
 - 此时我们运行场景，得到以下输出
@@ -235,14 +235,14 @@ var level := 0
 
 # 计时器的timeout信号链接，实现每隔几秒增加5经验值
 func _on_timer_timeout():
-	xp += 5
-	# 经验值超过20时升级
-	if xp >= 20:
-		xp = 0
-		level += 1
-		print("player level: " + str(level))
-		# 释放升级的信号，注意这里也要把需要传递的参数传递出去
-		level_up.emit(level)
+    xp += 5
+    # 经验值超过20时升级
+    if xp >= 20:
+        xp = 0
+        level += 1
+        print("player level: " + str(level))
+        # 释放升级的信号，注意这里也要把需要传递的参数传递出去
+        level_up.emit(level)
 ```
 
 - 第三处：信号在被建立连接的实现函数的参数列表处
@@ -258,18 +258,18 @@ extends Node
 var level_up_signal: Signal
 
 func _ready():
-	# 获取player中的升级信号
-	level_up_signal = player.level_up
-	# 真正与player中的升级信号建立链接，此时_on_player_level_up函数左侧才会出现绿色箭头
-	# 若想要断开链接，则同理调用disconnect函数即可
-	level_up_signal.connect(_on_player_level_up)
+    # 获取player中的升级信号
+    level_up_signal = player.level_up
+    # 真正与player中的升级信号建立链接，此时_on_player_level_up函数左侧才会出现绿色箭头
+    # 若想要断开链接，则同理调用disconnect函数即可
+    level_up_signal.connect(_on_player_level_up)
 
 # 这里注意信号定义时如果有传参，则这里也应当同样格式地写出来
 func _on_player_level_up(level: int):
-	if level == 3:
-		print("skill at Lv.3 unlocked!")
-	if level == 6:
-		print("skill at Lv.6 unlocked!")
+    if level == 3:
+        print("skill at Lv.3 unlocked!")
+    if level == 6:
+        print("skill at Lv.6 unlocked!")
 ```
 
 - 运行后得到以下输出
@@ -279,19 +279,19 @@ func _on_player_level_up(level: int):
 ## 三、关于脚本
 - GDScript是专门为了Godot进行游戏开发使用的面向对象的编程语言，其语法与Python较为相似
 - 在新建项目中创建一个名为`Main`的`Node`类型节点后，为这个节点添加GDS脚本`xxx.gd`，其会被初始化为如下形式
-	- `_ready()`函数在该节点被初始化后立刻执行，类似Unity的`Start()`或`Awake()`
-	- `_process(delta)`函数类似于Unity中的`Update`
+    - `_ready()`函数在该节点被初始化后立刻执行，类似Unity的`Start()`或`Awake()`
+    - `_process(delta)`函数类似于Unity中的`Update`
 
 ```gdscript
 extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+    pass
 ```
 
 ## 四、变量与常量
@@ -307,8 +307,8 @@ var health = 100
 
 # 游戏开始时在控制台处打印生命值
 func _ready():
-	print(health)
-	# 打印结果为100
+    print(health)
+    # 打印结果为100
 ```
 
 - 通过赋值修改变量值；赋值也可以用`+=`，`-=`，`*=`，`/=`等
@@ -319,10 +319,10 @@ extends Node
 var health = 100
 
 func _ready():
-	health = 20 + 20
-	health += 10
-	print(health)
-	# 打印结果为50
+    health = 20 + 20
+    health += 10
+    print(health)
+    # 打印结果为50
 ```
 
 ### 4.2 量的作用域
@@ -437,24 +437,24 @@ print("It's MyGO!!!!!")
 extends Node
 
 func _ready():
-	pass
+    pass
 
 func _process(delta):
-	pass
+    pass
 
 func _input(event):
-	pass
+    pass
 ```
 
 - 函数`_input(event)`在接收到任意输入的时候才会运行；其中`event`指代触发输入的事件
 
 ```gdscript
 func _input(event):
-	# 括号内引用我们设置好的按键映射名称，此处是"my_action"，即Space键
-	if event.is_action_pressed("my_action")
-		# 游戏运行时，按下空格键则会执行此处语句
-	if event.is_action_released("my_action")
-		# 松开空格键会执行的语句
+    # 括号内引用我们设置好的按键映射名称，此处是"my_action"，即Space键
+    if event.is_action_pressed("my_action")
+        # 游戏运行时，按下空格键则会执行此处语句
+    if event.is_action_released("my_action")
+        # 松开空格键会执行的语句
 ```
 
 ## 六、数据容器
@@ -508,9 +508,9 @@ crychic.append("Anon")
 
 ```gdscript
 var instruments = {
-	"Guitar": 2,
-	"Bass": 1,
-	"Keyboard": 0
+    "Guitar": 2,
+    "Bass": 1,
+    "Keyboard": 0
 }
 ```
 
@@ -519,8 +519,8 @@ var instruments = {
 
 ```gdscript
 var players = {
-	"Steve": {"Health": 100, "Level": 1}.
-	"Alice": {"Health": 80, "Level": 3}
+    "Steve": {"Health": 100, "Level": 1}.
+    "Alice": {"Health": 80, "Level": 3}
 }
 print(players["Steve"]["Level"])
 # 1
@@ -550,7 +550,7 @@ instruments["Violin"] = 1
 ```gdscript
 # 这里的name获取到的是字典instruments中的键
 for name in instruments:
-	print(name + ": " + str(instruments[name]))
+    print(name + ": " + str(instruments[name]))
 ```
 
 ### 6.3 枚举
@@ -559,9 +559,9 @@ for name in instruments:
 ```gdscript
 # 定义了一组阵营标签
 enum Alignment {
-	ALLY,
-	NEUTRAL,
-	ENEMY
+    ALLY,
+    NEUTRAL,
+    ENEMY
 }
 
 # 比如可以定义某个对象的成员变量中的阵营为敌人标签
@@ -578,11 +578,11 @@ enum Alignment {
 
 ```gdscript
 if 判断语句1:
-	执行语句1
+    执行语句1
 elif 判断语句2:
-	执行语句2
+    执行语句2
 else:
-	执行语句3
+    执行语句3
 ```
 
 #### 7.1.2 比较运算符
@@ -599,24 +599,24 @@ else:
 - 类似C++中的`switch`，`case`和`default`语句，依据值是否匹配来有选择地执行语句
 ```gdscript
 enum Alignment {
-	ALLY,
-	NEUTRAL,
-	ENEMY
+    ALLY,
+    NEUTRAL,
+    ENEMY
 }
 
 @export var alignment: Alignment = Alignment.ENEMY
 
 func _ready():
-	# 对变量alignment的值进行评估，对其不同值进行执行语句的选取
-	match alignment:
-		Alignment.ALLY:
-			执行语句1
-		Alignment.NEUTRAL:
-			执行语句2
-		Alignment.ENEMY:
-			执行语句3
-		_:
-			默认情况下的执行语句
+    # 对变量alignment的值进行评估，对其不同值进行执行语句的选取
+    match alignment:
+        Alignment.ALLY:
+            执行语句1
+        Alignment.NEUTRAL:
+            执行语句2
+        Alignment.ENEMY:
+            执行语句3
+        _:
+            默认情况下的执行语句
 ```
 
 ### 7.3 循环语句的使用
@@ -626,7 +626,7 @@ func _ready():
 
 ```gdscript
 for n in 4
-	print(n)
+    print(n)
 # 0
 # 1
 # 2
@@ -640,8 +640,8 @@ var crychic: Array[String] = ["Tomori", "Sakiko", "Muzimi", "Taki", "Soyo"]
 
 # 遍历数组中的元素
 for girl in crychic:
-	# 将会逐行打印出数组中的字符串元素
-	print(girl)
+    # 将会逐行打印出数组中的字符串元素
+    print(girl)
 ```
 
 #### 7.3.2 `while`循环
@@ -649,7 +649,7 @@ for girl in crychic:
 
 ```gdscript
 while 循环条件:
-	循环语句
+    循环语句
 ```
 
 #### 7.3.3 `break`与`continue`
@@ -663,16 +663,16 @@ while 循环条件:
 
 ```gdscript
 func 函数名(参数1, 参数2, ...):
-	执行语句
-	return xxx
+    执行语句
+    return xxx
 ```
 
 - 指定接收参数类型，也可以不指定
 
 ```gdscript
 func 函数名(参数1: 数据类型, 参数2: 数据类型, ...):
-	执行语句
-	return xxx
+    执行语句
+    return xxx
 ```
 
 ### 8.2 系统给的可用函数
@@ -686,11 +686,11 @@ func 函数名(参数1: 数据类型, 参数2: 数据类型, ...):
 
 ```gdscript
 func _ready():
-	var random_value = ranf()
-	if random_value < 0.2:
-		print("rare item")
-	else:
-		print("general item")
+    var random_value = ranf()
+    if random_value < 0.2:
+        print("rare item")
+    else:
+        print("general item")
 ```
 
 - 函数`randi_range(min, max)`来获取范围内的随机整数
@@ -712,21 +712,21 @@ signal health_changed(new_health)
 # 默认生命值为最大值100
 # 在该变量定义完成后添加一个冒号，并设置一个setter
 var health := 100:
-	# set()函数括号内的值我们来命名，用于指代health被试图更改为的传入值
-	set(vallue):
-		# health被修改时，即接收到了传入值value后需要执行的语句
-		# 将health赋值为对value的clamp，使得生命值最小不低于0，最大不超过100
-		health = clamp(value, 0, 100)
-		# 传递生命值变化的信号，并将当前生命值作为参数传递出去
-		health_changed(health)
+    # set()函数括号内的值我们来命名，用于指代health被试图更改为的传入值
+    set(vallue):
+        # health被修改时，即接收到了传入值value后需要执行的语句
+        # 将health赋值为对value的clamp，使得生命值最小不低于0，最大不超过100
+        health = clamp(value, 0, 100)
+        # 传递生命值变化的信号，并将当前生命值作为参数传递出去
+        health_changed(health)
 
 # 为了方便我们就将这个信号的链接处放在自身脚本上来监听信号的传递结果
 func _on_health_changed(new_health):
-	print(new_health)
+    print(new_health)
 
 func _ready():
-	# 给health进行赋值，这将会触发setter部分的函数
-	health = -10
+    # 给health进行赋值，这将会触发setter部分的函数
+    health = -10
 
 # 得到的输出结果为0，因为-10超出了clamp限制的范围，则自动取限制范围的最小值
 ```
@@ -739,19 +739,19 @@ func _ready():
 var chance := 0.2
 # 这种几率的百分号前的整数部分；此语境下chance_pct变量才是真正被读写的对象
 var chance_pct: int:
-	# 该变量被读取时执行的语句，最终需要return一个真正被读取的值
-	get:
-		return chance*100
-	# 该变量被修改时也要同步修改chance
-	set(value):
-		# 为了保证chance为浮点数，记得类型转换，以及除数也需要是浮点数
-		chance = float(value) / 100.0
+    # 该变量被读取时执行的语句，最终需要return一个真正被读取的值
+    get:
+        return chance*100
+    # 该变量被修改时也要同步修改chance
+    set(value):
+        # 为了保证chance为浮点数，记得类型转换，以及除数也需要是浮点数
+        chance = float(value) / 100.0
 
 func _ready():
-	# 此处只是一个该变量被读取的其中一种形式，其他的形式还可能为被调用去为别的变量赋值等
-	print(chance_pct)
-	chance_pct = 60
-	print(chance)
+    # 此处只是一个该变量被读取的其中一种形式，其他的形式还可能为被调用去为别的变量赋值等
+    print(chance_pct)
+    chance_pct = 60
+    print(chance)
 
 # 20
 # 0.6
@@ -774,8 +774,8 @@ extends Node
 
 # 成员函数，可以通过该节点的引用来调用
 func die():
-	health = 0
-	print(profession + " died")
+    health = 0
+    print(profession + " died")
 ```
 
 ### 9.2 内部类的创建
@@ -792,12 +792,12 @@ var legs := Equipment.new() # 腿甲
 
 # 我们可以访问这些变量所属类的一些属性
 func _ready():
-	chest.armor = 20 # 更改胸甲护甲值
+    chest.armor = 20 # 更改胸甲护甲值
 
 # 创建一个玩家装备的内部类
 class Equipment:
-	var weight := 5 # 装备重量
-	var armor := 10 # 装备护甲值
+    var weight := 5 # 装备重量
+    var armor := 10 # 装备护甲值
 ```
 
 ### 9.3 继承

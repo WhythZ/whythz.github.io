@@ -25,8 +25,8 @@ math: true
 
 ### 2.1 先决条件
 - 此处我在Windows环境下进行安装，其余操作系统环境下需要准备的东西详见原文档
-	- 按照官方文档，我至少需要准备好一定版本的Python环境
-	- 至于Git则爱装不装（相信大部分人都有），不装你同样可以笨笨地从Github仓库中下载压缩包然后解压，但就无法使用Git进行新版本拉取了
+    - 按照官方文档，我至少需要准备好一定版本的Python环境
+    - 至于Git则爱装不装（相信大部分人都有），不装你同样可以笨笨地从Github仓库中下载压缩包然后解压，但就无法使用Git进行新版本拉取了
 
 ### 2.2 获取emsdk并激活
 - 在某目录下，用Git克隆emsdk（Emscripten SDK），或者从[原仓库](https://github.com/emscripten-core/emsdk)中下载压缩包解压（所得文件夹自带和版本分支同名的`-main`后缀，有洁癖的可以删除一下）
@@ -112,8 +112,8 @@ int main()
 ```
 
 - 然后我们运行下面的指令来编译代码，若成功则会生成两个文件
-	- `a.out.wasm`：一个包含编译后代码的WebAssembly文件
-	- `a.out.js`：一个运行时支持以加载和执行`a.out.wasm`的JavaScript文件
+    - `a.out.wasm`：一个包含编译后代码的WebAssembly文件
+    - `a.out.js`：一个运行时支持以加载和执行`a.out.wasm`的JavaScript文件
 
 ```
 # 编译C语言源文件
