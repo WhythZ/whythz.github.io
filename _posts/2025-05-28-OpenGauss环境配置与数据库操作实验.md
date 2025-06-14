@@ -280,7 +280,7 @@ SELECT * FROM student LIMIT 5;
 
 - 以下是原始数据，注意其中的日期格式，后文有用
 
-```csv
+```
 //Student.csv
 StudentID,Name,Gender,BirthDate
 2021230,Wang Qiangzhuang,F,01/07/1999
