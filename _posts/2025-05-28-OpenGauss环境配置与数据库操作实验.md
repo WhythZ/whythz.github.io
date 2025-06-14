@@ -53,13 +53,13 @@ gsql -d postgres -p 5432
 ### 3.1 查询数据库
 - 通过以下指令可查看当前数据库（DB）的名称
 
-```postgresql
+```sql
 SELECT current_database();
 ```
 
 - 通过以下两种指令之一可以查询所有数据库
 
-```postgresql
+```sql
 \l
 SELECT datname FROM pg_database;
 ```
@@ -68,13 +68,13 @@ SELECT datname FROM pg_database;
 
 - 可以通过以下指令切换到特定数据库，切换成功后命令提示符会变为`db_name=#`
 
-```postgresql
+```sql
 \c db_name
 ```
 
 - 然后可通过以下指令查询当前数据库信息
 
-```postgresql
+```sql
 -- 查看所有已创建的表
 \dt
 
@@ -92,20 +92,20 @@ SELECT * FROM Student;
 ### 3.2 创建数据库
 - 上述示例中提到了一个`Club`数据库，通过后续笔记内容我们即可复现该数据库，我们首先创建该DB本身
 
-```postgresql
+```sql
 CREATE DATABASE Club;
 ```
 
 - 然后切换到该数据库
 
-```postgresql
+```sql
 \c Club
 ```
 
 ### 3.3 创建表及其约束
 - 分别创建名为`Club`（恰与DB同名）、`Student`、`ClubParticipation`的表结构
 
-```postgresql
+```sql
 -- 创建Club表，包含社团ID、名称和活动地点字段
 CREATE TABLE Club(
 	-- 社团ID，可变长度字符串，最多4个字符
@@ -133,14 +133,14 @@ CREATE TABLE ClubParticipation(
 
 - 上述`Student`的名字长度限制太短，可以改长点（注意分号`;`代表一条语句的结束）
 
-```postgresql
+```sql
 ALTER TABLE Student
 ALTER COLUMN name TYPE VARCHAR(20);
 ```
 
 - 为上述三表分别设置主键
 
-```postgresql
+```sql
 -- Club表主键为ClubID
 ALTER TABLE Club ADD PRIMARY KEY (ClubID);
 -- Student表主键为StudentID
@@ -151,13 +151,13 @@ ALTER TABLE ClubParticipation ADD PRIMARY KEY (ClubID,StudentID);
 
 - 在表创建后也可为表添加新列，例如以下指令添加`ManagerID`列到`Club`表中
 
-```postgresql
+```sql
 ALTER TABLE Club ADD COLUMN ManagerID VARCHAR(7);
 ```
 
 - 为上述三表分别设置外键约束
 
-```postgresql
+```sql
 -- ClubParticipation表的ClubID引用Club表的ClubID
 ALTER TABLE ClubParticipation ADD FOREIGN KEY (ClubID) REFERENCES Club(ClubID);
 -- ClubParticipation表的StudentID引用Student表的StudentID
@@ -168,7 +168,7 @@ ALTER TABLE Club ADD FOREIGN KEY (ManagerID) REFERENCES Student(StudentID);
 
 - 为上述三表分别设置其他约束
 
-```postgresql
+```sql
 -- Club表的ActivityLocation不允许为空
 ALTER TABLE Club ALTER COLUMN ActivityLocation SET NOT NULL;
 -- Club表的Name字段必须唯一
@@ -181,7 +181,7 @@ ALTER TABLE Student ADD CHECK (Gender IN ('M', 'F'));
 	- 级联更新：当==主表==的主键值被修改时，==从表==中对应的外键值会自动更新为相同值
 	- 级联删除：当==主表==中的记录被删除时，==从表==中所有引用该记录的相关记录自动删除
 
-```postgresql
+```sql
 ALTER TABLE ClubParticipation ADD FOREIGN KEY (ClubID) REFERENCES Club(ClubID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ClubParticipation ADD FOREIGN KEY (StudentID) REFERENCES Student(StudentID) ON UPDATE CASCADE ON DELETE CASCADE;
@@ -190,7 +190,7 @@ ALTER TABLE ClubParticipation ADD FOREIGN KEY (StudentID) REFERENCES Student(Stu
 ### 3.4 插入和修改数据
 - 以`Student`表为例，可为其插入数据，注意数据本身应当符合前文设置的规范
 
-```postgresql
+```sql
 -- 向Student表插入一条记录，值顺序分别对应表结构StudentID, Name, Gender, BirthDate，其中BirthDate为NULL表示未知
 INSERT INTO Student VALUES ('2021239', 'Hua Li', 'F', NULL);
 
@@ -202,19 +202,19 @@ INSERT INTO Student VALUES
 
 - 使用以下命令可通过主键`StudentID`对已插入的数据进行更新，此处是修改姓名
 
-```postgresql
+```sql
 UPDATE Student SET Name = 'Nan Li' WHERE StudentID = '2021239';
 ```
 
 - 使用以下命令可通过主键`StudentID`删除学生数据记录
 
-```postgresql
+```sql
 DELETE FROM Student WHERE StudentID = '2021239';
 ```
 
 - 再对其他表进行数据插入操作
 
-```postgresql
+```sql
 -- 插入数据到Club表
 INSERT INTO Club VALUES 
 ('0005', 'Roller Skating Club', 'Skating Rink at Sports Center', '2021239');
@@ -249,7 +249,7 @@ docker cp D:\Desktop\LabData\ClubParticipation-F.csv TestOpenGauss:/tmp/
 
 - 按如下顺序将上述CSV文件中的数据导入DB中的对应表结构中
 
-```postgresql
+```sql
 -- 导入Student表（注意日期格式）
 COPY Student FROM '/tmp/Student-F.csv' DELIMITER ',' CSV HEADER;
 
@@ -262,7 +262,7 @@ COPY ClubParticipation FROM '/tmp/ClubParticipation-F.csv' DELIMITER ',' CSV HEA
 
 - 导入完成后可通过以下代码检查导入的数据条数
 
-```postgresql
+```sql
 SELECT COUNT(*) FROM student;
 SELECT COUNT(*) FROM club;
 SELECT COUNT(*) FROM clubparticipation;
@@ -272,7 +272,7 @@ SELECT COUNT(*) FROM clubparticipation;
 
 - 也可通过以下方式进行检查，例如查看前五条数据
 
-```postgresql
+```sql
 SELECT * FROM student LIMIT 5;
 ```
 
@@ -354,7 +354,7 @@ ClubID,StudentID,JoinDate
 ### 3.6 定制化查询任务
 - 查询学号、姓名和性别
 
-```postgresql
+```sql
 SELECT studentid, name, gender FROM student;
 /*
  studentid |       name       | gender
@@ -387,7 +387,7 @@ SELECT studentid, name, gender FROM student;
 
 - 查询2002年前出生的学生学号
 
-```postgresql
+```sql
 SELECT studentid FROM student WHERE birthdate < '2002-01-01';
 /*
  studentid
@@ -410,7 +410,7 @@ SELECT studentid FROM student WHERE birthdate < '2002-01-01';
 
 - 查询2002年前出生的女生学号
 
-```postgresql
+```sql
 SELECT studentid FROM student WHERE gender = 'F' AND birthdate < '2002-01-01';
 /*
  studentid
@@ -427,7 +427,7 @@ SELECT studentid FROM student WHERE gender = 'F' AND birthdate < '2002-01-01';
 
 - 查询年龄18-21岁的学生学号和姓名
 
-```postgresql
+```sql
 SELECT studentid, name FROM student WHERE EXTRACT(YEAR FROM AGE(birthdate)) BETWEEN 18 AND 21;
 /*
  studentid |      name
@@ -444,7 +444,7 @@ SELECT studentid, name FROM student WHERE EXTRACT(YEAR FROM AGE(birthdate)) BETW
 
 - 查询姓"张"的学生
 
-```postgresql
+```sql
 SELECT studentid, name FROM student
 WHERE name LIKE '张%' OR name LIKE 'Zhang%';
 /*
@@ -457,7 +457,7 @@ WHERE name LIKE '张%' OR name LIKE 'Zhang%';
 
 - 查询出生日期为NULL的学生
 
-```postgresql
+```sql
 SELECT studentid, name FROM student WHERE birthdate IS NULL;
 /*
  studentid |   name
@@ -469,7 +469,7 @@ SELECT studentid, name FROM student WHERE birthdate IS NULL;
 
 - 按性别升序、学号降序显示前5名学生
 
-```postgresql
+```sql
 SELECT * FROM student ORDER BY gender ASC, studentid DESC LIMIT 5;
 /*
  studentid |   name    | gender |      birthdate
@@ -485,7 +485,7 @@ SELECT * FROM student ORDER BY gender ASC, studentid DESC LIMIT 5;
 
 - 统计每个学生参与的社团数量
 
-```postgresql
+```sql
 SELECT s.studentid, s.name, COUNT(cp.clubid) AS club_count
 FROM student s
 LEFT JOIN clubparticipation cp ON s.studentid = cp.studentid
@@ -521,7 +521,7 @@ GROUP BY s.studentid, s.name;
 
 - 统计每个社团的学生人数
 
-```postgresql
+```sql
 SELECT c.clubid, c.name, COUNT(cp.studentid) AS student_count
 FROM club c
 LEFT JOIN clubparticipation cp ON c.clubid = cp.clubid
@@ -556,7 +556,7 @@ GROUP BY c.clubid, c.name;
 
 ### 3.7 角色与权限管理
 
-```postgresql
+```sql
 -- 创建学生角色 WangMing（密码Abc*1234）
 CREATE ROLE "WangMing" WITH PASSWORD 'Abc*1234' LOGIN;
 -- 授予 Student 表查询和更新权限
@@ -582,7 +582,7 @@ gsql -d club -p 5432 -U WangMing -W Abc*1234
 
 - 尝试操作表，验证角色权限
 
-```postgresql
+```sql
 -- 应成功
 SELECT * FROM Student;
 -- 应失败（无DELETE权限）
