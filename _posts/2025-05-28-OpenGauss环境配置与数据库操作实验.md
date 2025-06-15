@@ -382,7 +382,7 @@ SELECT studentid, name, gender FROM student;
  2021248   | Peng Lei         | F
  2021249   | Jia Meng         | F
 (22 rows)
-+/
+*/
 ```
 
 - 查询2002年前出生的学生学号
