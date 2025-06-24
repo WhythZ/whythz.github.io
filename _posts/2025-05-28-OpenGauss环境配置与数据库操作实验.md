@@ -178,8 +178,8 @@ ALTER TABLE Student ADD CHECK (Gender IN ('M', 'F'));
 ```
 
 - 设置级联更新和级联删除
-	- 级联更新：当==主表==的主键值被修改时，==从表==中对应的外键值会自动更新为相同值
-	- 级联删除：当==主表==中的记录被删除时，==从表==中所有引用该记录的相关记录自动删除
+	- 级联更新：当**主表**的主键值被修改时，**从表**中对应的外键值会自动更新为相同值
+	- 级联删除：当**主表**中的记录被删除时，**从表**中所有引用该记录的相关记录自动删除
 
 ```sql
 ALTER TABLE ClubParticipation ADD FOREIGN KEY (ClubID) REFERENCES Club(ClubID) ON UPDATE CASCADE ON DELETE CASCADE;
