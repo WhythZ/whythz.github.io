@@ -4,7 +4,7 @@ title: 详解UGUI中RectTransform的轴心、锚点、尺寸、位置
 description: >-
   因为这块内容做UI时比较常用，故研究无限滚动列表时顺便总结了一下，以免忘记
 date: 2025-10-18 01:51:00 +0800
-categories: [游戏开发, 玩法相关]
+categories: [游戏开发, 引擎相关]
 tags: [Unity, U3D, UGUI]
 # pin: true
 # media_subpath: '/resources/'
