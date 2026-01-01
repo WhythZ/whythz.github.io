@@ -10,6 +10,7 @@ order: 4
 <ul class="readers-list clearfix">
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://blog.inkey.top"><div>InkeyP</div><div>网安大手子</div></a></li>
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://ttyclear.github.io/"><div>ttyclear</div><div>全能大手子</div></a></li>
+<li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="虾头二刺螈" target="_blank" href="https://mizore.website/"><div>Mizore</div><div>无敌大手子</div></a></li>
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Haoquan的主页" target="_blank" href="https://haoquanzhang.github.io/"><div>Haoquan</div><div>CV大手子</div></a></li>
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="Xinjie的主页" target="_blank" href="https://xinjie-shen.com/"><div>Xinjie</div><div>AI大手子</div></a></li>
 <li class="wow slideInUp animated" style="visibility: visible; animation-name: slideInUp;"><a rel="coll eague" title="ICBrochure平台主页" target="_blank" href="http://www.icbrochure.tech/"><div>ICBrochure</div><div>IC大手子们</div></a></li>
