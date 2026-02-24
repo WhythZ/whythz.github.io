@@ -21,34 +21,34 @@ math: true
 
 ### 1.1 CSharp热更方案
 - CSharp其实可以实现热更新，需使用其反射机制
-	- CSharp的反射指的是在运行时（通过程序集中的元数据）动态地获取和操作程序集、类型、成员等信息的机制（如实例化对象、调用方法、获取和设置属性等），而无需在编译时明确知道这些类型和成员的具体信息
-	- 将需频繁更改的部分逻辑做成独立的动态链接库DLL（可包含类，函数等资源）以让其他程序动态加载使用，而主模块代码则不作修改
-	- 通过反射机制加载这些DLL，用新DLL文件替换旧DLL，主模块加载DLL就实现了热更新
+    - CSharp的反射指的是在运行时（通过程序集中的元数据）动态地获取和操作程序集、类型、成员等信息的机制（如实例化对象、调用方法、获取和设置属性等），而无需在编译时明确知道这些类型和成员的具体信息
+    - 将需频繁更改的部分逻辑做成独立的动态链接库DLL（可包含类，函数等资源）以让其他程序动态加载使用，而主模块代码则不作修改
+    - 通过反射机制加载这些DLL，用新DLL文件替换旧DLL，主模块加载DLL就实现了热更新
 - **某些CSharp热更方案只适用Android热更新**，iOS由于其安全机制，不允许在新申请的内存（用于修改后的代码使用）上进行写操作，故目前CSharp的反射基本不被商业项目用作热更新
 
 ### 1.2 Lua热更方案
 - 核心是CSharp与Lua代码间的相互调用
-	- 需为Unity项目导入热更新库，如`XLua`或`toLua`等
-	- 创建基于Lua解释器的管理器，用Lua解释器来解释执行Lua代码
-	- XLua等库支持以热补丁形式将已用CSharp实现的逻辑替换为Lua实现
+    - 需为Unity项目导入热更新库，如`XLua`或`toLua`等
+    - 创建基于Lua解释器的管理器，用Lua解释器来解释执行Lua代码
+    - XLua等库支持以热补丁形式将已用CSharp实现的逻辑替换为Lua实现
 - 商业游戏大体有三种结合Lua热更新的成熟开发方式
-	- 纯Lua开发：全部逻辑都用Lua实现，好处是灵活性强，坏处是性能较差（Lua毕竟是解释型语言，虽然当代的手机可能不差这点性能）
-	- 半CSharp半Lua：核心逻辑CSharp业务逻辑Lua，好处是对比纯Lua性能会更好，坏处是灵活性较差（只动例如活动等业务逻辑时可热更，但若动核心逻辑就只能强更了，这一般会导致用户流失）
-	- CSharp与热补丁：对于一开始就使用纯CSharp实现但中途决定要加Lua热更新的项目，那就只能通过热补丁实现了（这样会使得项目变得不优雅，故最好一开始就定好要不要Lua热更新）
+    - 纯Lua开发：全部逻辑都用Lua实现，好处是灵活性强，坏处是性能较差（Lua毕竟是解释型语言，虽然当代的手机可能不差这点性能）
+    - 半CSharp半Lua：核心逻辑CSharp业务逻辑Lua，好处是对比纯Lua性能会更好，坏处是灵活性较差（只动例如活动等业务逻辑时可热更，但若动核心逻辑就只能强更了，这一般会导致用户流失）
+    - CSharp与热补丁：对于一开始就使用纯CSharp实现但中途决定要加Lua热更新的项目，那就只能通过热补丁实现了（这样会使得项目变得不优雅，故最好一开始就定好要不要Lua热更新）
 
 ### 1.3 两类方案对比
 - CSharp是静态编译语言
-	- 代码在编译时被CLR转换成机器码后才能够被计算机执行，故**运行时无法修改已编译的代码**，且CLR会在运行时对代码进行各种优化和安全检查，这使得热更新困难
+    - 代码在编译时被CLR转换成机器码后才能够被计算机执行，故**运行时无法修改已编译的代码**，且CLR会在运行时对代码进行各种优化和安全检查，这使得热更新困难
 - Lua是动态脚本语言
-	- 代码在运行时被解释器逐行执行而无需静态编译，即运行时动态加载新脚本文件替换已加载代码模块，这使得Lua可在运行时修改已加载代码实现**热更新**，而无需重新启动整个程序
+    - 代码在运行时被解释器逐行执行而无需静态编译，即运行时动态加载新脚本文件替换已加载代码模块，这使得Lua可在运行时修改已加载代码实现**热更新**，而无需重新启动整个程序
 
 ## 二、关于XLua方案
 - [XLua](https://github.com/Tencent/XLua)基于Lua虚拟机实现逻辑热更（Lua脚本可作为资源参与热更，但核心代码如渲染管线仍以CSharp实现）
-	- 通过自动生成CSharp-Lua桥接代码（Wrap文件）实现双向调用
-	- 利用Unity的`LuaInterface`组件实现与引擎API的交互
+    - 通过自动生成CSharp-Lua桥接代码（Wrap文件）实现双向调用
+    - 利用Unity的`LuaInterface`组件实现与引擎API的交互
 - 应用场景例子如下
-	- 频繁变动的配置表（例如以Lua脚本形式储存的配置表数据）
-	- 大型项目多人协作（例如编写简单UI逻辑时无需修改CSharp核心代码，而是编写Lua脚本，提高效率且降低风险）
+    - 频繁变动的配置表（例如以Lua脚本形式储存的配置表数据）
+    - 大型项目多人协作（例如编写简单UI逻辑时无需修改CSharp核心代码，而是编写Lua脚本，提高效率且降低风险）
 - 导入XLua只需将其Github仓库的`Assets`目录内的两个文件夹直接拖入你自己项目的对应目录下即可
 
 ## 三、Csharp调用Lua
@@ -1047,7 +1047,7 @@ print("dicNewMethod[\"key\"] = " .. tostring(dicNewMethod["key"])) -- LUA: dicNe
 print("dicNewMethod[\"key\"] = " .. tostring(dicNewMethod:get_Item("key"))) -- LUA: dicNewMethod["key"] = 114514
 print("dicNewMethod[\"key\"] = " .. tostring(dicNewMethod:TryGetValue("key"))) -- LUA: dicNewMethod["key"] = true
 -- CSharp中的声明为bool TryGetValue(TKey key, out TValue value)导致上下两打印结果不同，因为CSharp无多返回值，故用out传参模拟
-print(dicNewMethod:TryGetValue("key")) -- LUA: true	114514
+print(dicNewMethod:TryGetValue("key")) -- LUA: true    114514
 ---------------------------------------------------------------------------------------------------------------------------/>
 ```
 
@@ -1269,8 +1269,8 @@ namespace WZ
 ```
 
 - 在Lua中一般认为只支持调用**有`class`泛型约束**且**接收泛型类型参数**的泛型方法，除非通过新版本XLua提供的`xlua.get_generic_method`方法，但不建议使用，因其对Unity打包时存在限制，即对于`Building Setting`->`Player Settings`->`Other Settings`->`Configuration`->`Scripting Backend`项的`Mono`和`IL2CPP`两个配置值
-	- 若选`Mono`则`xlua.get_generic_method`支持对所有形式泛型方法的调用
-	- 若选`IL2CPP`则`xlua.get_generic_method`要求泛型参数必须为引用类型，若为值类型则该值类型必须已经在CSharp侧被使用过，才能被支持在Lua侧作为泛型函数的泛型类型使用
+    - 若选`Mono`则`xlua.get_generic_method`支持对所有形式泛型方法的调用
+    - 若选`IL2CPP`则`xlua.get_generic_method`要求泛型参数必须为引用类型，若为值类型则该值类型必须已经在CSharp侧被使用过，才能被支持在Lua侧作为泛型函数的泛型类型使用
 
 ```lua
 local obj = CS.WZ.TestGenericMethods()
@@ -1487,8 +1487,8 @@ print(tostring(rb)) -- LUA: TestGO (UnityEngine.Rigidbody): -32252
 
 #### 4.7.2 以XLua修饰系统类型
 - 前文提到过Lua调用CSharp侧的拓展方法时需添加`[LuaCallCSharp]`修饰，虽然对于其它不承载拓展方法的类，即便不修饰`[LuaCallCSharp]`在Lua中被调用也不会报错，**但对于需要被Lua侧访问的类，建议都加上该修饰以提升性能**
-	- 若无该修饰，Lua会默认在运行时**通过反射查找**被调用的CSharp中对应的类和方法等，效率较低（动态）
-	- 若有该修饰，重新生成XLua后会为被标记的类生成某些对应的代码而避免反射，以提高性能（静态）
+    - 若无该修饰，Lua会默认在运行时**通过反射查找**被调用的CSharp中对应的类和方法等，效率较低（动态）
+    - 若有该修饰，重新生成XLua后会为被标记的类生成某些对应的代码而避免反射，以提高性能（静态）
 - 但是对于自定义类我们可以直接手动修饰，**但对于系统已有类或是第三方库的类，我们却不能直接去修改代码加上修饰**，对于`[CSharpCallLua]`同样存在该问题，如下所示
 
 ```lua
@@ -1530,7 +1530,7 @@ namespace WZ
             //还可填入更多所需要的类型，此处只写一个来测试
         };
 
-		//对于[LuaCallCSharp]同理
+        //对于[LuaCallCSharp]同理
         [LuaCallCSharp]
         public static List<System.Type> luaCallCSharpList = new List<System.Type>() {
             typeof(GameObject),

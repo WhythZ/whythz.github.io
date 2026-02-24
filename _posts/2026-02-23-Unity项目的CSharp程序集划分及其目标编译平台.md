@@ -25,28 +25,28 @@ math: true
 
 #### 1.1.1 目录职能
 - 在一个Unity项目的根目录下，几个特殊子目录职能如下
-	- `Assets/`目录（纳入版本管理）
-		- 存放包括CSharp脚本在内的各种游戏资产，包括各种CSharp脚本
-	- `Packages/`目录（纳入版本管理）
-		- 存放各种独立功能包，可以是从插件缓存目录`Library/PackageCache/`中拷贝到此处的进行功能定制覆写的插件源码，也可以是自己写的某些独立模块
-		- 每个`Package`一般都会被编译到一个**独立程序集**内，其DLL文件名等属性由其对应的`.asmdef`配置文件进行定义，详见后文自定义程序集相关
-	- `Library/ScriptAssemblies/`目录（不纳入版本管理的临时目录）
-		- 存放各种编译后的**DLL程序集产物**
+    - `Assets/`目录（纳入版本管理）
+        - 存放包括CSharp脚本在内的各种游戏资产，包括各种CSharp脚本
+    - `Packages/`目录（纳入版本管理）
+        - 存放各种独立功能包，可以是从插件缓存目录`Library/PackageCache/`中拷贝到此处的进行功能定制覆写的插件源码，也可以是自己写的某些独立模块
+        - 每个`Package`一般都会被编译到一个**独立程序集**内，其DLL文件名等属性由其对应的`.asmdef`配置文件进行定义，详见后文自定义程序集相关
+    - `Library/ScriptAssemblies/`目录（不纳入版本管理的临时目录）
+        - 存放各种编译后的**DLL程序集产物**
 
 #### 1.1.2 编译顺序
 - Unity会根据CSharp脚本文件在项目文件夹结构中的位置，以如下四个阶段编译脚本得到DLL产物（每一阶段的程序集可以引用其上方已生成的DLL，但不能引用下方的）
-	- 第一阶段：`Assembly-CSharp-firstpass.dll`
-		- 目标是位于名为`Standard Assets`（仅在`Assets`根文件夹中有效）、`Pro Standard Assets`、`Plugins`的文件夹中，且**不位于**名为`Editor`的子文件夹中的全部所谓**运行时脚本**（即除去其内的其它脚本）
-		- 基础依赖层，通常存放第三方的SDK、底层插件、或是不常修改的工具类，这些代码通常非常庞大且稳定，当修改了游戏逻辑代码时只需重编后面的主程序集等，减少了编译时间
-	- 第二阶段：`Assembly-CSharp-Editor-firstpass.dll`
-		- 目标是位于名为`Standard Assets`、`Pro Standard Assets`、`Plugins`的文件夹中，且**位于**任意位置下的名为`Editor`的文件夹中的全部所谓**编辑器脚本**
-		- 专门为插件配套的编辑器工具脚本，能引用第一阶段的相关代码，但不能引用主程序集，保证了插件的独立性
-	- 第三阶段：`Assembly-CSharp.dll`
-		- 目标是**不位于**名为`Editor`的文件夹中的**所有其他脚本**
-		- 主程序集，承载具体的核心游戏逻辑（如角色控制、UI系统、关卡流程等），无法访问编辑器扩展程序集，因为游戏在真机上运行时不需要Unity编辑器工具
-	- 第四阶段：`Assembly-CSharp-Editor.dll`
-		- 目标是**位于**名为`Editor`的文件夹中的**所有其它脚本**
-		- 编辑器扩展，存放如自动打包脚本、资源导入处理脚本等工具实现，该程序集不入包
+    - 第一阶段：`Assembly-CSharp-firstpass.dll`
+        - 目标是位于名为`Standard Assets`（仅在`Assets`根文件夹中有效）、`Pro Standard Assets`、`Plugins`的文件夹中，且**不位于**名为`Editor`的子文件夹中的全部所谓**运行时脚本**（即除去其内的其它脚本）
+        - 基础依赖层，通常存放第三方的SDK、底层插件、或是不常修改的工具类，这些代码通常非常庞大且稳定，当修改了游戏逻辑代码时只需重编后面的主程序集等，减少了编译时间
+    - 第二阶段：`Assembly-CSharp-Editor-firstpass.dll`
+        - 目标是位于名为`Standard Assets`、`Pro Standard Assets`、`Plugins`的文件夹中，且**位于**任意位置下的名为`Editor`的文件夹中的全部所谓**编辑器脚本**
+        - 专门为插件配套的编辑器工具脚本，能引用第一阶段的相关代码，但不能引用主程序集，保证了插件的独立性
+    - 第三阶段：`Assembly-CSharp.dll`
+        - 目标是**不位于**名为`Editor`的文件夹中的**所有其他脚本**
+        - 主程序集，承载具体的核心游戏逻辑（如角色控制、UI系统、关卡流程等），无法访问编辑器扩展程序集，因为游戏在真机上运行时不需要Unity编辑器工具
+    - 第四阶段：`Assembly-CSharp-Editor.dll`
+        - 目标是**位于**名为`Editor`的文件夹中的**所有其它脚本**
+        - 编辑器扩展，存放如自动打包脚本、资源导入处理脚本等工具实现，该程序集不入包
 
 ```
 UnityProject/
@@ -62,8 +62,8 @@ UnityProject/
 
 #### 1.2.1 ADF文件
 - 在Unity资源管理器中右键选择`Create -> Assembly Definition`可创建**ADF程序集定义文件**`.asmdef`
-	- ADF文件所在目录下的全部CSharp脚本都会被编译进一个独立DLL程序集内，程序集的名称无关乎ADF所在的文件夹名或ADF的文件名，只跟ADF文件中的Name属性有关
-	- 其目的在于拆分各个功能模块组织为单独的程序集，并通过定义明晰的依赖关系，确保脚本更改后只会重新生成必需的程序集，减少编译时间
+    - ADF文件所在目录下的全部CSharp脚本都会被编译进一个独立DLL程序集内，程序集的名称无关乎ADF所在的文件夹名或ADF的文件名，只跟ADF文件中的Name属性有关
+    - 其目的在于拆分各个功能模块组织为单独的程序集，并通过定义明晰的依赖关系，确保脚本更改后只会重新生成必需的程序集，减少编译时间
 - 例如在`Assets`目录下（同样适用于根目录下`Packages`文件夹内的各包）创建若干`.asmdef`文件，那么其所在目录的所有CSharp脚本都纳入该程序集
 
 ```
@@ -90,10 +90,10 @@ UnityProject/Assets/
 
 #### 1.2.3 编译顺序
 - 一旦在文件夹中创建了ADF文件，该文件夹下的脚本就会从Unity的预定义程序集编译流程中剥离出来，即忽略了那些特殊文件夹名的规则
-	- Unity会分析所有ADF程序集间的引用关系，没有任何依赖的程序集最先编译，被依赖的程序集总是在使用者之前完成编译
-	- 如果自定义程序集的**平台选项只勾选**了`Editor`平台，则属于**编辑器自定义程序集**（只在Unity编辑器下运行而不入包），否则属于**运行时自定义程序集**
-		- 编辑器自定义程序集：通常与`Assembly-CSharp-Editor.dll`处于同一阶段，谁先谁后则取决于依赖关系
-		- 运行时自定义程序集：通常在`Assembly-CSharp-firstpass.dll`之后、`Assembly-CSharp.dll`主程序集之前编译
+    - Unity会分析所有ADF程序集间的引用关系，没有任何依赖的程序集最先编译，被依赖的程序集总是在使用者之前完成编译
+    - 如果自定义程序集的**平台选项只勾选**了`Editor`平台，则属于**编辑器自定义程序集**（只在Unity编辑器下运行而不入包），否则属于**运行时自定义程序集**
+        - 编辑器自定义程序集：通常与`Assembly-CSharp-Editor.dll`处于同一阶段，谁先谁后则取决于依赖关系
+        - 运行时自定义程序集：通常在`Assembly-CSharp-firstpass.dll`之后、`Assembly-CSharp.dll`主程序集之前编译
 
 ## 二、按平台编译
 
@@ -133,7 +133,7 @@ public class Test : MonoBehaviour
 }
 ```
 
-### 2.2 问题发现
+### 2.2 问题描述
 
 - 如下脚本的作用是在CI/CD流水线（远程构建机）上通过Unity编辑器静默启动Unity项目，这会触发项目中所有CSharp脚本的编译，产出DLL程序集产物
 
@@ -226,20 +226,22 @@ if __name__ == "__main__":
 // Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
 private void Start()
 {
-	Debug.Log("UNITY_EDITOR");
-	Debug.Log("UNITY_STANDALONE_WIN");
+    Debug.Log("UNITY_EDITOR");
+    Debug.Log("UNITY_STANDALONE_WIN");
 }
 ```
 
 ![测试程序集的分平台编译P1.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/测试程序集的分平台编译P1.png)
 
-- 如果我想让`Test.dll`中的条件编译走其它平台如`UNITY_IOS`，则通过新增启动命令参数`-buildPlatform`是无用的，因为这个参数控制的是游戏出包的平台，而不控制`Library/ScriptAssemblies/`下的DLL产物
+- 如果我想让`Test.dll`中的条件编译走其它平台如`UNITY_IOS`该怎么做呢
 
 ### 2.3 问题解决
+
+#### 2.3.1 弯路方法
 - 为了让条件编译**走我们预期的平台分支**，可通过Unity命令行的`-executeMethod`参数，在项目打开后调用一个方法（即在`Editor/`特殊文件夹下新增的一个CSharp脚本内的静态方法）进行平台切换，然后再用新的平台参数进行DLL编译，新建的`Assets/Editor/BuildHelper.cs`如下，其检测Python脚本传入的`-targetPlatform`获取目标平台并进行切换
-	- 由于在CI/CD批处理模式执行该脚本的过程中，通过`EditorUserBuildSettings.SwitchActiveBuildTarget`方法（参考[官方文档](https://docs.unity.cn/cn/current/ScriptReference/EditorUserBuildSettings.SwitchActiveBuildTarget.html)）完成平台切换后**无法立刻生效**（但是平台信息会被缓存到本地）
-	- 这是因为需要删除原本DLL后（即`Library/ScriptAssemblies/`目录下的全部文件，包括当前正在执行的脚本DLL）再**重新打开项目**时，Unity才会**按照缓存的新平台信息重新编译DLL**
-	- 所以Python脚本必须在第一次打开Unity项目完成平台切换后就直接结束，然后删除全部DLL缓存，再重新打开目标项目触发编译，此时编译出的DLL走的才会是**新平台的条件编译分支**
+    - 由于在CI/CD批处理模式执行该脚本的过程中，通过`EditorUserBuildSettings.SwitchActiveBuildTarget`方法（参考[官方文档](https://docs.unity.cn/cn/current/ScriptReference/EditorUserBuildSettings.SwitchActiveBuildTarget.html)）完成平台切换后**无法立刻生效**（但是平台信息会被缓存到本地）
+    - 这是因为需要删除原本DLL后（即`Library/ScriptAssemblies/`目录下的全部文件，包括当前正在执行的脚本DLL）再**重新打开项目**时，Unity才会**按照缓存的新平台信息重新编译DLL**
+    - 所以Python脚本必须在第一次打开Unity项目完成平台切换后就直接结束，然后删除全部DLL缓存，再重新打开目标项目触发编译，此时编译出的DLL走的才会是**新平台的条件编译分支**
 
 ```cs
 using UnityEditor;
@@ -443,10 +445,97 @@ if __name__ == "__main__":
 
 ![安装Android与iOS支持.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/安装Android与iOS支持.png)
 
+### 2.3.2 简洁方法
+- 前文的方法虽然经过验证是有效的，但是要编译两次实在不优雅，我仔细查了文档发现原来通过命令行参数`-buildTarget`就可以指定构建平台（注意同样需要确保已经为目标平台的安装了对应的Editor扩展），修改Python脚本如下，仅比初版在命令行里多加了个参数而已（其实我一开始就试过这个方法，但是当时把这个东西误写成了`-buildPlatform`而并未生效，导致我以为这个方法不行，回头一看自己原先写的文档才发现打错了哈哈）
+
+```python
+import subprocess
+import traceback
+import os
+import time
+
+def main():
+    # Unity编辑器可执行文件位置，以及目标项目位置
+    UnityExePath = "D:/UNITY/Editor/2022.3.48f1c1/Editor/Unity.exe"
+    ClientPath = "D:/Desktop/TestUnityDLL"
+    targetPlatform = "Android" # iOS、Android、Win64、OSXUniversal、WebGL
+
+    # 日志的输出目录
+    workFolder = os.path.join(ClientPath, "Build", "Logs")
+    if not os.path.exists(workFolder):
+        os.makedirs(workFolder)
+    logPath = os.path.join(workFolder, "OpenProject.log")
+
+    # 用Unity编辑器打开目标项目，编译其所依赖的DLL文件到根目录的Library/ScriptAssemblies/目录下
+    command = [
+        UnityExePath, # Unity编辑器可执行文件
+        "-projectPath", ClientPath, # 指定Unity项目
+        "-quit", # Unity完成任务后自动退出
+        "-batchmode", # 无需人工交互的批处理模式，必须配合-quit使用
+        "-nographics", # 无图形界面模式，节省内存和启动时间
+        "-logFile", logPath, # 将Unity日志输出到指定文件
+        "-buildTarget", targetPlatform, # 指定构建的目标平台
+    ]
+
+    # 应用上述命令
+    callUnity = CallUnity()
+    result_code = callUnity.execute_unity_method(command, logPath)
+    if result_code == 0:
+        print("[INFO] Task succeeded")
+    else:
+        print(f"[INFO] Task failed: {result_code}")
+        exit(-1)
+
+class CallUnity:
+    # 返回0表示成功，非0表示失败
+    def execute_unity_method(self, cmd: list, log_path: str):
+        print(f"[INFO] 执行命令: {' '.join(cmd)}")
+        # 清理旧的日志文件
+        if os.path.exists(log_path):
+            os.remove(log_path)
+        # 开始启动Unity项目
+        process = None
+        last_line_count = 0
+        try:
+            # 启动Unity进程（批处理模式，无图形界面）
+            process = subprocess.Popen(cmd)
+            # 实时监控Unity日志文件，显示编译进度
+            while process.poll() is None: # 进程还在运行
+                if os.path.exists(log_path):
+                    try:
+                        with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+                            lines = f.readlines()
+                            # 只输出新增的日志行
+                            if len(lines) > last_line_count:
+                                new_lines = lines[last_line_count:]
+                                for line in new_lines:
+                                    # 过滤并显示编译相关的关键信息
+                                    if any(keyword in line for keyword in ['Compiling', 'Assembly', 'Library', 'dll']):
+                                        print(f"[COMPILE] {line.strip()}")
+                                last_line_count = len(lines)
+                    except Exception:
+                        pass
+                time.sleep(1) # 每秒检查一次
+            # 等待进程完全结束，获取返回码
+            process.wait()
+            return process.returncode
+        except Exception as e:
+            print(f"[INFO] Task exception: {e}")
+            traceback.print_exc()
+            return -1
+        finally:
+            # 确保进程被正确清理
+            if process and process.poll() is None:
+                process.kill()
+
+if __name__ == "__main__":
+    main()
+```
+
 ### 2.4 结果验证
 
 #### 2.4.1 验证平台配置
-- 通过`EditorUserBuildSettings.SwitchActiveBuildTarget`方法切换平台，相当于在Unity编辑器内通过`File -> Build Settings`内选择切换到目标平台
+- 无论通过`EditorUserBuildSettings.SwitchActiveBuildTarget`方法还是`-buildTarget`参数切换平台，效果都等价于在Unity编辑器内通过`File -> Build Settings`内选择切换到目标平台
 
 ![BuildSettings切换目标平台.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/BuildSettings切换目标平台.png)
 
