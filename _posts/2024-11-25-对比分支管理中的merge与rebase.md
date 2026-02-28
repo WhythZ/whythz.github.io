@@ -4,7 +4,7 @@ title: 对比分支管理中的merge与rebase
 description: >-
   介绍在合并分支时使用`git merge`指令和`git rebase`指令的区别，并介绍多人协作中使用`rebase`需要遵守的黄金准则，以及若不遵守有怎样的后果
 date: 2024-11-25 17:50:00 +0800
-categories: [工程相关, 版本管理]
+categories: [集成相关, 版本管理]
 tags: [Git, Github]
 # pin: true
 # media_subpath: '/resources/'

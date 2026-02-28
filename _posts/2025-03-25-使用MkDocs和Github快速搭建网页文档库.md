@@ -4,7 +4,7 @@ title: 使用MkDocs和Github快速搭建网页文档库
 description: >-
   以一个成功使用MkDocs与Github Actions以及Github Pages部署的课程资料库为例，直接介绍搭建流程，读者可根据需求对该流程进行更改，以搭建个性化的静态文档库
 date: 2025-03-25 00:06:00 +0800
-categories: [工程相关, 站点搭建]
+categories: [其它开发, 站点搭建]
 tags: [Github, MkDocs, 环境配置]
 # pin: true
 # media_subpath: '/resources/'
