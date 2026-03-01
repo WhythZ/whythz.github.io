@@ -22,9 +22,9 @@ math: true
 
 ![SCUT-FT-Guide示意.png](/resources/2025-03-25-使用MkDocs和Github快速搭建网页文档库/SCUT-FT-Guide示意.png)
 
-## 3.2 部署流程
+## 二、部署流程
 
-### 3.2.1 创建MkDocs配置文件
+### 2.1 创建MkDocs配置文件
 - 在仓库根目录（与`.git`同目录）下创建一个`mkdocs.yml`文件进行基本的配置，更多的自定义配置参考[该页面说明](https://www.mkdocs.org/user-guide/configuration/)，例如上述课程攻略的[该配置文件](https://github.com/OpenFuTech/SCUT-FT-Guide/blob/db94db855532673a74bf7c1e6afd6270a73a7b4b/mkdocs.yml)
 
 ```yml
@@ -33,7 +33,7 @@ theme: 可选项，设置网页采用的主题样式，无此字段就采用默�
 repo_url: 可选项，填了就会在生成的页面内提供链接到此地址的入口
 ```
 
-### 3.2.2 编写目录生成脚本
+### 2.2 编写目录生成脚本
 - 有了`mkdocs.yml`配置文件后，MkDocs还需要在根目录下有一个`docs`文件夹，其内至少要有一个`index.html`才可显示页面
 - 若想在显示页面，需使用`Python`环境下的`mkdocs`包才可以使用相应指令进行构建（若需在本地构建运行，参考官网指引，本文中不多赘述），在根目录新建`requirements.txt`，将该依赖项写入其中，以便后续在Github Actions的工作流中安装依赖
 
@@ -198,7 +198,7 @@ if __name__ == '__main__':
 - ...
 ```
 
-### 3.2.3 创建Actions工作流
+### 2.3 创建Actions工作流
 - 然后我们需要在根目录下创建`.github`文件夹，在该文件夹下创建`workflows`文件夹，其内创建一个`.yml`文件以配置Github Actions工作流，如下[main.yml](https://github.com/OpenFuTech/SCUT-FT-Guide/blob/main/.github/workflows/main.yml)所示
 
 ```yml
@@ -249,7 +249,7 @@ jobs:
 - 该工作流每当远程仓库的分支`main`发生新的提交时被触发，执行`update.py`脚本将页面内容生成至`gh-pages`分支
 - 执行该工作流前必须创建一个名为`gh-pages`的分支（然后最好将内容清空），并`push`到远程仓库以确保分支存在，否则工作流无法找到该分支
 
-### 3.2.4 在Github发布Page
+### 2.4 在Github发布Page
 - 完成上述步骤后（均在`main`分支进行），将更新`push`到`main`分支触发工作流，执行完毕后构建好的文件即存在于`gh-pages`分支下
 
 ![gh-pages内容示例.png](/resources/2025-03-25-使用MkDocs和Github快速搭建网页文档库/gh-pages内容示例.png)
