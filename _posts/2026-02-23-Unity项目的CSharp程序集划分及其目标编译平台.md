@@ -1,8 +1,8 @@
 ---
 # author:
-title: Unity项目的CSharp程序集划分及其目标编译平台
+title: Unity项目CSharp程序集的编译
 description: >-
-  用Editor打开Unity项目时会编译其内所有CSharp脚本为DLL到其Library目录下，本文研究如何在命令行中完成该过程，以及如何在该过程中更改编译的目标平台
+  本文研究Unity项目中的CSharp代码的编译产物有哪些，并且各类平台条件编译宏以及编辑器宏是怎样在其中发挥作用的
 date: 2026-02-23 20:30:00 +0800
 categories: [游戏开发, 引擎相关]
 tags: [Unity, CSharp]
@@ -77,16 +77,16 @@ UnityProject/Assets/
         └── Enemy.asmdef
 ```
 
-![ADF文件Unity内设置.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/ADF文件Unity内设置.png)
+![ADF文件Unity内设置.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/ADF文件Unity内设置.png)
 
 - 可以看到在VS内区分了各程序集，各对应一个`.csproj`，若没有则可删掉`.sln`让Unity刷新一下解决方案
 
-![ADF文件使得VS内区分独立程序集.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/ADF文件使得VS内区分独立程序集.png)
+![ADF文件使得VS内区分独立程序集.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/ADF文件使得VS内区分独立程序集.png)
 
 #### 1.2.2 DLL产物
 - 名称字段为`XXX`的ADF文件对应的产物存放在项目根目录下的`Library/ScriptAssemblies/XXX.dll`位置
 
-![ADF文件产物DLL文件.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/ADF文件产物DLL文件.png)
+![ADF文件产物DLL文件.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/ADF文件产物DLL文件.png)
 
 #### 1.2.3 编译顺序
 - 一旦在文件夹中创建了ADF文件，该文件夹下的脚本就会从Unity的预定义程序集编译流程中剥离出来，即忽略了那些特殊文件夹名的规则
@@ -231,7 +231,7 @@ private void Start()
 }
 ```
 
-![测试程序集的分平台编译P1.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/测试程序集的分平台编译P1.png)
+![测试程序集的分平台编译P1.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/测试程序集的分平台编译P1.png)
 
 - 如果我想让`Test.dll`中的条件编译走其它平台如`UNITY_IOS`该怎么做呢
 
@@ -443,7 +443,7 @@ if __name__ == "__main__":
 [INFO] Task failed: 1
 ```
 
-![安装Android与iOS支持.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/安装Android与iOS支持.png)
+![安装Android与iOS支持.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/安装Android与iOS支持.png)
 
 #### 2.3.2 简洁方法
 - 前文的方法虽然经过验证是有效的，但是要编译两次实在不优雅，我仔细查了文档发现原来通过命令行参数`-buildTarget`就可以指定构建平台（注意同样需要确保已经为目标平台的安装了对应的Editor扩展），修改Python脚本如下，仅比初版在命令行里多加了个参数而已（其实我一开始就试过这个方法，但是当时把这个东西误写成了`-buildPlatform`而并未生效，导致我以为这个方法不行，回头一看自己原先写的文档才发现打错了哈哈）
@@ -537,7 +537,7 @@ if __name__ == "__main__":
 #### 2.4.1 验证平台配置
 - 无论通过`EditorUserBuildSettings.SwitchActiveBuildTarget`方法还是`-buildTarget`参数切换平台，效果都等价于在Unity编辑器内通过`File -> Build Settings`内选择切换到目标平台
 
-![BuildSettings切换目标平台.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/BuildSettings切换目标平台.png)
+![BuildSettings切换目标平台.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/BuildSettings切换目标平台.png)
 
 - 设置的平台信息保存在项目的`Library/EditorUserBuildSettings.asset`二进制配置文件内，可通过Python的`UnityPy`库来解析其配置字段
 
@@ -579,9 +579,130 @@ if __name__ == "__main__":
 
 - 在虚拟环境`pip install UnityPy`安装该工具包后，运行上述脚本即可解析配置文件，由[官方API文档](https://docs.unity.cn/cn/2021.3/ScriptReference/EditorUserBuildSettings.html)可知只要检查`m_ActiveBuildTarget`的值无误即可，我用前文的方法分别切换到Android和iOS平台后进行验证，发现平台信息的确是准确地被缓存到该配置文件内了
 
-![测试EditorUserBuildSettings文件平台字段.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/测试EditorUserBuildSettings文件平台字段.png)
+![测试EditorUserBuildSettings文件平台字段.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/测试EditorUserBuildSettings文件平台字段.png)
 
 #### 2.4.2 验证反编译DLL
 - 编译完成后，通过[dnSpy](https://github.com/dnSpy/dnSpy)工具检查`Test.dll`文件的反编译代码，可发现如下图测试的iOS和Android平台的DLL反编译代码均正确符合预期（注意在测试切换平台编译时，需先把dnSpy内原先打开的`Tesh.dll`移除掉，再拖入新编译的产物进行查看，防止旧的内容残留而导致误判）
 
-![生成iOS和Android条件编译DLL验证.png](/resources/2026-02-23-Unity项目的CSharp程序集划分及其目标编译平台/生成iOS和Android条件编译DLL验证.png)
+![生成iOS和Android条件编译DLL验证.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/生成iOS和Android条件编译DLL验证.png)
+
+## 三、UNITY_EDITOR
+
+### 3.1 现象观察
+- 依旧以前文使用的如下脚本为例，将其通过`.asmdef`单独编译到一个程序集内进行观察
+
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class Test : MonoBehaviour
+{
+    void Start()
+    {
+#if UNITY_EDITOR
+        Debug.Log("UNITY_EDITOR");
+#endif
+#if UNITY_IOS
+        Debug.Log("UNITY_IOS");
+#endif
+#if UNITY_ANDROID
+        Debug.Log("UNITY_ANDROID");
+#endif
+#if UNITY_STANDALONE_WIN
+        Debug.Log("UNITY_STANDALONE_WIN");
+#endif
+#if UNITY_STANDALONE_OSX
+        Debug.Log("UNITY_STANDALONE_OSX");
+#endif
+#if UNITY_WEBGL
+        Debug.Log("UNITY_WEBGL");
+#endif
+    }
+}
+```
+
+- 我们发现无论是选择什么目标平台，在打开项目时产生在`Library/ScriptAssemblies/XXX.dll`内的DLL文件，都是带有`UNITY_EDITOR`宏条件编译的
+
+![程序集的编译补充P1.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/程序集的编译补充P1.png)
+
+- 但是如果我们将该工程打包（如下图选择的是Windows目标平台，Mono后端），从包体中的`项目名称_Data/Managed`文件夹内找到同一个DLL文件，就会发现其不带`UNITY_EDITOR`条件编译了
+
+![程序集的编译补充P2.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/程序集的编译补充P2.png)
+
+- 我们再用IL2CPP后端构建一次，其构建产物目录内的`项目名称_BackUpThisFolder_ButDontShipItWithYourGame/Managed`文件夹内就可找到测试用的那个DLL，其同样不带`UNITY_EDITOR`宏
+
+![程序集的编译补充P3.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/程序集的编译补充P3.png)
+
+![程序集的编译补充P4.png](/resources/2026-02-23-Unity项目CSharp程序集的编译/程序集的编译补充P4.png)
+
+### 3.2 本质原因
+
+#### 3.2.1 不同编译阶段
+- 在`Library/ScriptAssemblies`目录下的DLL
+    - 生成时机：**用Unity打开项目时**，或已经打开Editor时项目内**代码发生修改后**
+    - 目标平台：取决于BuildSettings内设置
+    - DLL产物：包含各Editor目录下CSharp脚本对应的程序集
+    - 条件编译宏：**包含`UNITY_EDITOR`等编辑器宏**
+    - 引用引擎DLL：包括`UnityEngine.dll`和`UnityEditor.dll`
+- 在游戏出包产物目录下的DLL
+    - 生成时机：**主动为项目执行Build时**
+    - 目标平台：取决于BuildSettings内设置
+    - DLL产物：不包含诸如`Assembly-CSharp-Editor.dll`等程序集
+    - 条件编译宏：**不包含`UNITY_EDITOR`等编辑器宏**
+    - 引用引擎DLL：有`UnityEngine.dll`而不包含`UnityEditor.dll`
+
+#### 3.2.2 构建目录结构
+
+##### 3.2.2.1 IL2CPP后端
+- 项目Build时，剔除了编辑器宏的CSharp源码经过Roslyn编译器（和开发时编译Library内DLL的是同一个步骤，但是宏等配置不同）会先生成中间产物IL，然后再通过IL2CPP最终生成平台机器码，这个过程中的DLL形式的IL中间产物会被完整备份到产物目录
+
+```
+TestMacro/Build/IL2CPP/ # 游戏工程由IL2CPP后端构建的产物目录
+├─TestMacro_BackUpThisFolder_ButDontShipItWithYourGame/
+│  ├─il2cppOutput/ # 备份从IL转换成的CPP源代码，如Test.cpp
+│  └─Managed/ # 完整IL中间产物的备份，如Assembly-CSharp.dll和Test.dll
+│
+├─TestMacro_Data/
+│  ├─il2cpp_data/
+│  │  ├─Metadata/ # 存放global-metadata.dat元数据，引用GameAssembly.dll等内的具体代码实现
+│  │  └─Resources/
+│  └─Resources/
+│
+├─GameAssembly.dll # 真正运行的代码，此处为Windows最终产物，若目标平台是Android则为libil2cpp.so
+├─baselib.dll
+├─UnityPlayer.dll
+├─UnityCrashHandler64.exe
+└─TestMacro.exe
+```
+
+##### 3.2.2.2 Mono后端
+- 类似于直接把IL2CPP生成的IL中间产物直接作为最终产物放到`TestMacro_Data/`内使用
+
+```
+TestMacro/Build/Mono/ # 游戏工程由Mono后端构建的产物目录
+├─TestMacro_BackUpThisFolder_ButDontShipItWithYourGame/
+│  ├─il2cppOutput/
+│  └─Managed/
+│
+├─TestMacro_Data/
+│  ├─il2cpp_data/
+│  │  ├─Metadata/
+│  │  └─Resources/
+│  └─Resources/
+│
+├─MonoBleedingEdge
+│  ├─EmbedRuntime
+│  └─etc
+│      └─mono
+│          ├─2.0
+│          │  └─Browsers
+│          ├─4.0
+│          │  └─Browsers
+│          ├─4.5
+│          │  └─Browsers
+│          └─mconfig
+│
+└─TestMacro_Data
+    ├─Managed
+    └─Resources
+```
